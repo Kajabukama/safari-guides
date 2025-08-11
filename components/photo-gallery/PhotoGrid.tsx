@@ -1,27 +1,27 @@
-import { motion } from 'framer-motion';
-import { PhotoCard, Photo as PhotoType } from './PhotoCard';
+import { motion } from "framer-motion";
+import { PhotoCard, Photo as PhotoType } from "@/components/photo-gallery/PhotoCard";
 
-export const PhotoGrid = ({ 
-  photos, 
-  onPhotoClick 
-}: { 
-  photos: PhotoType[]; 
+export const PhotoGrid = ({
+  photos,
+  onPhotoClick,
+}: {
+  photos: PhotoType[];
   onPhotoClick: (id: number) => void;
 }) => {
   // Calculate the number of columns based on viewport width
   const getGridCols = () => {
-    if (typeof window === 'undefined') return 'md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5';
-    
+    if (typeof window === "undefined") return "md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6";
+
     const width = window.innerWidth;
-    if (width < 640) return 'grid-cols-1';
-    if (width < 1024) return 'grid-cols-2';
-    if (width < 1280) return 'grid-cols-3';
-    if (width < 1536) return 'grid-cols-4';
-    return 'grid-cols-5';
+    if (width < 640) return "grid-cols-1";
+    if (width < 1024) return "grid-cols-2";
+    if (width < 1280) return "grid-cols-3";
+    if (width < 1536) return "grid-cols-4";
+    return "grid-cols-6";
   };
 
   return (
-    <motion.div 
+    <motion.div
       className={`grid gap-4 sm:gap-6 ${getGridCols()}`}
       initial="hidden"
       animate="show"
@@ -31,29 +31,29 @@ export const PhotoGrid = ({
           opacity: 1,
           transition: {
             staggerChildren: 0.05,
-            when: "beforeChildren"
-          }
-        }
+            when: "beforeChildren",
+          },
+        },
       }}
     >
       {photos.map((photo, index) => (
         <motion.div
           key={photo.id}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ 
-            opacity: 1, 
+          animate={{
+            opacity: 1,
             y: 0,
-            transition: { 
+            transition: {
               duration: 0.3,
-              ease: 'easeOut'
-            } 
+              ease: "easeOut",
+            },
           }}
-          viewport={{ once: true, margin: '100px' }}
+          viewport={{ once: true, margin: "100px" }}
           className="w-full"
         >
-          <PhotoCard 
-            photo={photo} 
-            onClick={onPhotoClick} 
+          <PhotoCard
+            photo={photo}
+            onClick={onPhotoClick}
             index={index % 20} // Limit to 20 different animation delays
           />
         </motion.div>

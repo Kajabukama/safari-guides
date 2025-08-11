@@ -10,20 +10,19 @@ import {
   HeartIcon,
   ShareIcon,
   CheckCircleIcon,
-  MessageSquareIcon,
   UserRoundIcon,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import LocationMap from "@/components/maps/LocationMap";
-import { useAuth } from "@/components/providers/AuthProvider";
 import Image from "next/image";
 import { Event } from "@/interfaces/event";
 import { events } from "@/mock/events";
+import SliderThumbnail from "@/components/SliderThumbnail";
+import EventBookingForm from "@/components/events/EventBookingForm";
+import SimilarEvents from "@/components/events/SimilarEvents";
 
 const EventDetail = () => {
-  const { openLoginModal } = useAuth();
   const [isLiked, setIsLiked] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const fadeIn = {
@@ -42,7 +41,7 @@ const EventDetail = () => {
   return (
     <div className="min-h-screen">
       <div className="relative">
-        <div className="h-[60vh] bg-gray-200 overflow-hidden">
+        <div className="h-[60vh] overflow-hidden">
           <Image
             src={event.images[activeImageIndex]}
             alt={event.title}
@@ -53,26 +52,18 @@ const EventDetail = () => {
         </div>
         <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
           {event.images.map((image, index) => (
-            <div
+            <SliderThumbnail
               key={index}
-              className={`w-16 h-10 rounded-md overflow-hidden border-2 ${
-                activeImageIndex === index ? "border-white" : "border-transparent opacity-70"
-              }`}
-              onClick={() => setActiveImageIndex(index)}
-            >
-              <Image
-                src={image}
-                alt={`Thumbnail ${index + 1}`}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="w-full h-full object-cover"
-              />
-            </div>
+              image={image}
+              index={index}
+              activeImageIndex={activeImageIndex}
+              setActiveImageIndex={setActiveImageIndex}
+            />
           ))}
         </div>
         <div className="absolute top-4 right-4 flex space-x-2">
           <div
-            className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors"
+            className="bg-white rounded-full flex items-center justify-center p-2 shadow-md hover:bg-gray-100 transition-colors size-10"
             onClick={() => setIsLiked(!isLiked)}
           >
             <HeartIcon
@@ -80,9 +71,9 @@ const EventDetail = () => {
               className={isLiked ? "text-red-500 fill-red-500" : "text-gray-700"}
             />
           </div>
-          <Button className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors">
+          <div className="bg-white rounded-full flex items-center justify-center p-2 shadow-md hover:bg-gray-100 transition-colors size-10">
             <ShareIcon size={20} className="text-gray-700" />
-          </Button>
+          </div>
         </div>
       </div>
       <div className="container mx-auto px-4 py-8">
@@ -120,12 +111,12 @@ const EventDetail = () => {
                 </div>
               </div>
               {/* Guide Information */}
-              <div className="flex items-center mb-6">
-                <div className="relative overflow-hidden rounded-full aspect-[4/4] w-full">
+              <div className="flex items-center gap-x-3 mb-6">
+                <div className="relative overflow-hidden rounded-full size-14">
                   <Image
                     src={event.guideImage}
                     alt={event.guideName}
-                    className="w-12 h-12 rounded-full object-cover mr-4"
+                    className="w-full h-full object-cover mr-4"
                     width={1920}
                     height={1920}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -133,7 +124,9 @@ const EventDetail = () => {
                 </div>
                 <div>
                   <p className="font-medium">Hosted by {event.guideName}</p>
-                  <p className="text-gray-600 text-sm">{event.guideExperience} experience</p>
+                  <p className="text-sm text-muted-foreground">
+                    {event.guideExperience} experience
+                  </p>
                 </div>
               </div>
               {/* Description */}
@@ -211,7 +204,7 @@ const EventDetail = () => {
                         }}
                       ></div>
                     </div>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       {event.maxParticipants - event.currentParticipants} spots left
                     </p>
                   </div>
@@ -279,94 +272,14 @@ const EventDetail = () => {
             </motion.div>
           </div>
           {/* Booking Card */}
-          <div className="lg:col-span-1">
-            <motion.div
-              variants={fadeIn}
-              initial="hidden"
-              animate="visible"
-              className="sticky top-24"
-            >
-              <Card className="shadow-none">
-                <CardContent>
-                  <div className="mb-4">
-                    <div className="flex items-baseline justify-between">
-                      <span className="text-2xl font-bold">{event.price}</span>
-                      <span className="text-gray-600">per person</span>
-                    </div>
-                  </div>
-                  <div className="space-y-4 mb-6">
-                    <div className="flex justify-between pb-4 border-b">
-                      <div className="flex items-center">
-                        <CalendarIcon size={18} className="text-gray-600 mr-2" />
-                        <span>Date</span>
-                      </div>
-                      <span className="font-medium">{event.date}</span>
-                    </div>
-                    <div className="flex justify-between pb-4 border-b">
-                      <div className="flex items-center">
-                        <ClockIcon size={18} className="text-gray-600 mr-2" />
-                        <span>Time</span>
-                      </div>
-                      <span className="font-medium">{event.time}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <div className="flex items-center">
-                        <UsersIcon size={18} className="text-gray-600 mr-2" />
-                        <span>Availability</span>
-                      </div>
-                      <span className="font-medium text-emerald-600">
-                        {event.maxParticipants - event.currentParticipants} spots left
-                      </span>
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <Button className="w-full text-lg py-6" onClick={openLoginModal}>
-                      Reserve a Spot
-                    </Button>
-                    <Button variant="outline" className="w-full">
-                      <MessageSquareIcon size={16} className="mr-2" />
-                      Message Host
-                    </Button>
-                  </div>
-                  <div className="mt-4 text-center text-sm text-gray-600">
-                    No payment required to reserve
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
+          <EventBookingForm event={event} />
         </div>
         {/* Similar Events */}
         <div className="mt-16">
           <h2 className="text-2xl font-bold mb-6">Similar Events</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* This would typically be populated with actual similar events */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6">
             {events.map((event: Event, index: number) => (
-              <Card key={index} className="overflow-hidden">
-                <div className="relative">
-                  <Image
-                    width={1800}
-                    height={1200}
-                    src={event.images[0]}
-                    alt={`Similar Event ${index}`}
-                    className="w-full h-48 object-cover"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold mb-1">{event.title}</h3>
-                  <div className="flex items-center text-gray-600 text-sm mb-2">
-                    <CalendarIcon size={14} className="mr-1" />
-                    <span>{event.date}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <MapPinIcon size={14} className="mr-1 text-gray-600" />
-                      <span className="text-sm text-gray-600">Serengeti</span>
-                    </div>
-                    <span className="font-semibold">$150</span>
-                  </div>
-                </div>
-              </Card>
+              <SimilarEvents key={index} event={event} />
             ))}
           </div>
         </div>

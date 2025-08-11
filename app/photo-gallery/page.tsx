@@ -152,7 +152,7 @@ export default function PhotoGallery() {
       </div>
 
       {/* CTA Section */}
-      <section className="bg-stone-50 py-16 mt-16">
+      <section className="py-16 my-16">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{

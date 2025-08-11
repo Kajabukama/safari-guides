@@ -10,7 +10,7 @@ export default function LocationMap({
   return (
     <div className="rounded-3xl overflow-hidden">
       <GoogleMapsEmbed
-        apiKey="AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao"
+        apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY!}
         height={400}
         width="100%"
         mode="place"

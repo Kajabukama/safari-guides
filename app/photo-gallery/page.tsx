@@ -120,7 +120,7 @@ export default function PhotoGallery() {
           >
             <div className="flex flex-col items-center">
               <CameraIcon size={48} className="text-stone-300 mb-4" />
-              <h3 className="text-xl font-semibold mb-2 text-stone-800">No photos found</h3>
+              <h3 className="text-xl font-semibold mb-2">No photos found</h3>
               <p className="text-stone-600 mb-6 max-w-md">
                 We couldn&apos;t find any photos matching your search criteria
               </p>

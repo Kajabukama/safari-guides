@@ -87,10 +87,6 @@ const Guides = () => {
     // Search functionality is handled by the filter
   };
 
-  const handleFilters = () => {
-    // Filter functionality is handled by the sidebar
-  };
-
   const handleClearFilters = () => {
     setSearchTerm("");
     setSelectedLocation("");

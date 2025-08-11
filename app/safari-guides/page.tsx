@@ -36,10 +36,8 @@ const Guides = () => {
         selectedExperience === "" || guide.experience === selectedExperience;
       const matchesLanguage =
         selectedLanguage === "" || guide.languages.some((l) => l === selectedLanguage);
-      const matchesTourType =
-        selectedTourType === "" || guide.tourType === selectedTourType;
-      const matchesGroupSize =
-        selectedGroupSize === "" || guide.groupSize === selectedGroupSize;
+      const matchesTourType = selectedTourType === "" || guide.tourType === selectedTourType;
+      const matchesGroupSize = selectedGroupSize === "" || guide.groupSize === selectedGroupSize;
       const matchesAvailable = !availableOnly || guide.available;
 
       return (
@@ -108,12 +106,7 @@ const Guides = () => {
 
   return (
     <div className="min-h-screen relative">
-      <GuidesHeroSection
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-        onSearch={handleSearch}
-        onFilters={handleFilters}
-      />
+      <GuidesHeroSection />
 
       <div className="container mx-auto px-4 py-12 relative">
         <div className="flex flex-col lg:flex-row gap-8">

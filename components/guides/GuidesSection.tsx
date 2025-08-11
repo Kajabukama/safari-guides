@@ -3,7 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
-import GuideList from "./GuideList";
+import GuideList from "@/components/guides/GuideList";
 
 const GuidesSection: React.FC = () => {
   const fadeIn = {

@@ -1,7 +1,6 @@
 "use client";
-import React, { useState, memo } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useParams } from "next/navigation";
 import {
   CalendarIcon,
   StarIcon,
@@ -9,8 +8,6 @@ import {
   UsersIcon,
   CheckCircleIcon,
   ClockIcon,
-  HeartIcon,
-  ShareIcon,
   CompassIcon,
   UtensilsIcon,
   TentIcon,
@@ -28,13 +25,8 @@ import SimilarItineraries from "@/components/itineraries/SimilarItineraries";
 import ItineraryImageSlider from "@/components/itineraries/ItineraryImageSlider";
 
 const ItineraryDetail = () => {
-  const { id } = useParams<{
-    id: string;
-  }>();
   const { openLoginModal } = useAuth();
   const [isLiked, setIsLiked] = useState(false);
-  // In a real app, this data would be fetched from an API
-
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   // Animation variants
   const fadeIn = {
@@ -81,10 +73,13 @@ const ItineraryDetail = () => {
               </div>
               {/* Guide Information */}
               <div className="flex items-center mb-6">
-                <img
+                <Image
                   src={itinerary.guideImage}
                   alt={itinerary.guideName}
                   className="w-12 h-12 rounded-full object-cover mr-4"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  width={1920}
+                  height={1080}
                 />
                 <div>
                   <p className="font-medium">Guided by {itinerary.guideName}</p>
@@ -117,7 +112,7 @@ const ItineraryDetail = () => {
               <Tabs defaultValue="itinerary" className="mb-8">
                 <TabsList className="w-full md:w-auto">
                   <TabsTrigger value="itinerary">Itinerary</TabsTrigger>
-                  <TabsTrigger value="includes">What's Included</TabsTrigger>
+                  <TabsTrigger value="includes">What&apos;s Included</TabsTrigger>
                   <TabsTrigger value="accommodation">Accommodation</TabsTrigger>
                   <TabsTrigger value="reviews">Reviews</TabsTrigger>
                   <TabsTrigger value="faq">FAQ</TabsTrigger>
@@ -143,7 +138,7 @@ const ItineraryDetail = () => {
                 <TabsContent value="includes" className="mt-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                      <h3 className="text-lg font-semibold mb-4">What's Included</h3>
+                      <h3 className="text-lg font-semibold mb-4">What&apos;s Included</h3>
                       <ul className="space-y-2">
                         {itinerary.includes.map((item, index) => (
                           <li key={index} className="flex items-start">
@@ -157,7 +152,7 @@ const ItineraryDetail = () => {
                       </ul>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold mb-4">What's Not Included</h3>
+                      <h3 className="text-lg font-semibold mb-4">What&apos;s Not Included</h3>
                       <ul className="space-y-2">
                         {itinerary.excludes.map((item, index) => (
                           <li key={index} className="flex items-start">

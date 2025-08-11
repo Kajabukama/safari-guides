@@ -4,16 +4,11 @@ import Image from "next/image";
 interface DestinationCardProps {
   name: string;
   image: string;
-  description: string;
+  description?: string;
   guideCount: number;
 }
 
-const DestinationCard: React.FC<DestinationCardProps> = ({
-  name,
-  image,
-  description,
-  guideCount,
-}) => {
+const DestinationCard: React.FC<DestinationCardProps> = ({ name, image, guideCount }) => {
   return (
     <div className="relative group overflow-hidden rounded-lg shadow-md aspect-[4/5] w-full">
       <div className="relative w-full h-full">

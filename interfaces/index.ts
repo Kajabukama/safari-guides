@@ -50,21 +50,6 @@ export interface ItineraryMany {
   description?: string;
 }
 
-// Event interfaces
-export interface Event {
-  id: number;
-  title: string;
-  image: string;
-  date: string;
-  time: string;
-  location: string;
-  price: string;
-  guideId: number;
-  guideName: string;
-  guideImage: string;
-  description: string;
-}
-
 // Service interfaces
 export interface Service {
   id: string;

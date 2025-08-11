@@ -13,7 +13,9 @@ const ItinerariesCTASection: React.FC = () => {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold text-white mb-4">Can't find the perfect safari?</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Can&apos;t find the perfect safari?
+          </h2>
           <p className="text-white/90 text-xl mb-8 max-w-2xl mx-auto">
             Our local guides can create custom itineraries tailored to your interests, schedule, and
             budget

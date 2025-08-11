@@ -15,7 +15,7 @@ const SafariItineraries = () => {
 
   // Filter itineraries based on search and filters
   const filteredItineraries = useMemo(() => {
-    let filtered = itineraries.filter((itinerary) => {
+    const filtered = itineraries.filter((itinerary) => {
       const matchesSearch =
         itinerary.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         itinerary.location.toLowerCase().includes(searchTerm.toLowerCase()) ||

@@ -1,24 +1,12 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  StarIcon,
-  MapPinIcon,
-  CheckIcon,
-  CalendarIcon,
-  MessageCircleIcon,
-  GlobeIcon,
-  InstagramIcon,
-  FacebookIcon,
-  TwitterIcon,
-} from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { CheckIcon, GlobeIcon, InstagramIcon, FacebookIcon, TwitterIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import ProfileActionButtons from "./ProfileActionButtons";
-import ProfilePriceSection from "./ProfilePriceSection";
-import GuideProfileReviews from "./GuideProfileReviews";
+import ProfileActionButtons from "@/components/guides/ProfileActionButtons";
+import ProfilePriceSection from "@/components/guides/ProfilePriceSection";
+import GuideProfileReviews from "@/components/guides/GuideProfileReviews";
 
 interface GuideProfileInfoProps {
   guide: {

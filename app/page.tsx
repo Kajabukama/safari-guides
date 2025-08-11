@@ -2,11 +2,11 @@ import React from "react";
 import HeroSection from "@/components/home/HeroSection";
 import ItinerariesSection from "@/components/itineraries/ItinerariesSection";
 import ServicesSection from "@/components/services/ServicesSection";
-import { featuredItineraries, upcomingEvents, featuredServices, destinations } from "@/mock/data";
-import { Service } from "@/interfaces";
+import { featuredItineraries, featuredServices, destinations } from "@/mock/data";
 import EventsSection from "@/components/events/EventsSection";
 import DestinationsSection from "@/components/destinations/DestinationsSection";
 import GuidesSection from "@/components/guides/GuidesSection";
+import { events } from "@/mock/events";
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
       <HeroSection />
       <GuidesSection />
       <ItinerariesSection itineraries={featuredItineraries} />
-      <EventsSection events={upcomingEvents} />
+      <EventsSection events={events} />
       <DestinationsSection destinations={destinations} />
       <ServicesSection services={featuredServices} />
     </div>

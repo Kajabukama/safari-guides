@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { CameraIcon } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
@@ -59,7 +58,7 @@ const GuideGallery: React.FC<GuideGalleryProps> = ({ gallery, guideName }) => {
           <div>
             <h2 className="text-xl font-semibold mb-2">Photo Gallery</h2>
             <p className="text-muted-foreground">
-              Explore {guideName}'s collection of travel moments and destinations
+              Explore {guideName}&aposs collection of travel moments and destinations
             </p>
           </div>
           <div className="flex flex-wrap gap-2 mt-4 md:mt-0">
@@ -120,7 +119,7 @@ const GuideGallery: React.FC<GuideGalleryProps> = ({ gallery, guideName }) => {
           <div className="text-center py-12">
             <CameraIcon size={48} className="mx-auto text-muted-foreground mb-4" />
             <p className="text-muted-foreground">
-              No photos found in the "{selectedCategory}" category.
+              No photos found in the {selectedCategory} category.
             </p>
             <Button
               variant="outline"

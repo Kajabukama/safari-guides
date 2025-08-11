@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { MenuIcon, XIcon, Globe, Menu } from "lucide-react";
+import { Globe, Menu } from "lucide-react";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { Button } from "@/components/ui/button";
 import NavLinkItem from "@/components/header/navlink";
-import UserAuthActions from "./UserAuthActions";
-import MobileMenu from "./MobileMenu";
+import UserAuthActions from "@/components/header/UserAuthActions";
+import MobileMenu from "@/components/header/MobileMenu";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

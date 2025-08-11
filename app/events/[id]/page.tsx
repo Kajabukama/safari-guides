@@ -1,8 +1,7 @@
 "use client";
-import React, { useState, memo } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useParams } from "next/navigation";
-import { event } from "@/mock/events";
+import { event } from "@/mock/event";
 import {
   CalendarIcon,
   ClockIcon,
@@ -20,17 +19,13 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import LocationMap from "@/components/maps/LocationMap";
 import { useAuth } from "@/components/providers/AuthProvider";
 import Image from "next/image";
+import { Event } from "@/interfaces/event";
+import { events } from "@/mock/events";
 
 const EventDetail = () => {
-  const { id } = useParams<{
-    id: string;
-  }>();
   const { openLoginModal } = useAuth();
   const [isLiked, setIsLiked] = useState(false);
-  // In a real app, this data would be fetched from an API
-
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  // Animation variants
   const fadeIn = {
     hidden: {
       opacity: 0,
@@ -46,36 +41,37 @@ const EventDetail = () => {
   };
   return (
     <div className="min-h-screen">
-      {/* Image Gallery */}
       <div className="relative">
         <div className="h-[60vh] bg-gray-200 overflow-hidden">
-          <img
+          <Image
             src={event.images[activeImageIndex]}
             alt={event.title}
             className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
-        {/* Image Thumbnails */}
         <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
           {event.images.map((image, index) => (
-            <button
+            <div
               key={index}
               className={`w-16 h-10 rounded-md overflow-hidden border-2 ${
                 activeImageIndex === index ? "border-white" : "border-transparent opacity-70"
               }`}
               onClick={() => setActiveImageIndex(index)}
             >
-              <img
+              <Image
                 src={image}
                 alt={`Thumbnail ${index + 1}`}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="w-full h-full object-cover"
               />
-            </button>
+            </div>
           ))}
         </div>
-        {/* Action buttons */}
         <div className="absolute top-4 right-4 flex space-x-2">
-          <button
+          <div
             className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors"
             onClick={() => setIsLiked(!isLiked)}
           >
@@ -83,10 +79,10 @@ const EventDetail = () => {
               size={20}
               className={isLiked ? "text-red-500 fill-red-500" : "text-gray-700"}
             />
-          </button>
-          <button className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors">
+          </div>
+          <Button className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors">
             <ShareIcon size={20} className="text-gray-700" />
-          </button>
+          </Button>
         </div>
       </div>
       <div className="container mx-auto px-4 py-8">
@@ -125,11 +121,16 @@ const EventDetail = () => {
               </div>
               {/* Guide Information */}
               <div className="flex items-center mb-6">
-                <img
-                  src={event.guideImage}
-                  alt={event.guideName}
-                  className="w-12 h-12 rounded-full object-cover mr-4"
-                />
+                <div className="relative overflow-hidden rounded-full aspect-[4/4] w-full">
+                  <Image
+                    src={event.guideImage}
+                    alt={event.guideName}
+                    className="w-12 h-12 rounded-full object-cover mr-4"
+                    width={1920}
+                    height={1920}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
                 <div>
                   <p className="font-medium">Hosted by {event.guideName}</p>
                   <p className="text-gray-600 text-sm">{event.guideExperience} experience</p>
@@ -144,7 +145,7 @@ const EventDetail = () => {
               <Tabs defaultValue="schedule" className="mb-8">
                 <TabsList className="w-full md:w-auto">
                   <TabsTrigger value="schedule">Schedule</TabsTrigger>
-                  <TabsTrigger value="includes">What's Included</TabsTrigger>
+                  <TabsTrigger value="includes">What&apos;s Included</TabsTrigger>
                   <TabsTrigger value="participants">Participants</TabsTrigger>
                   <TabsTrigger value="faq">FAQ</TabsTrigger>
                 </TabsList>
@@ -167,7 +168,7 @@ const EventDetail = () => {
                 <TabsContent value="includes" className="mt-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                      <h3 className="text-lg font-semibold mb-4">What's Included</h3>
+                      <h3 className="text-lg font-semibold mb-4">What&apos;s Included</h3>
                       <ul className="space-y-2">
                         {event.includes.map((item, index) => (
                           <li key={index} className="flex items-start">
@@ -271,10 +272,8 @@ const EventDetail = () => {
               <div className="mb-8">
                 <h2 className="text-xl font-semibold mb-4">Location</h2>
                 <LocationMap
-                  latitude={event.coordinates.lat}
-                  longitude={event.coordinates.lng}
-                  popupText={event.location}
-                  height="400px"
+                  latitude={event.coordinates.lat.toString()}
+                  longitude={event.coordinates.lng.toString()}
                 />
               </div>
             </motion.div>
@@ -342,22 +341,22 @@ const EventDetail = () => {
           <h2 className="text-2xl font-bold mb-6">Similar Events</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* This would typically be populated with actual similar events */}
-            {[1, 2, 3].map((i) => (
-              <Card key={i} className="overflow-hidden">
+            {events.map((event: Event, index: number) => (
+              <Card key={index} className="overflow-hidden">
                 <div className="relative">
-                  <img
-                    src={`https://images.unsplash.com/photo-${
-                      1540000000000 + i * 10000
-                    }?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80`}
-                    alt={`Similar Event ${i}`}
+                  <Image
+                    width={1800}
+                    height={1200}
+                    src={event.images[0]}
+                    alt={`Similar Event ${index}`}
                     className="w-full h-48 object-cover"
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold mb-1">Photography Workshop {i}</h3>
+                  <h3 className="font-semibold mb-1">{event.title}</h3>
                   <div className="flex items-center text-gray-600 text-sm mb-2">
                     <CalendarIcon size={14} className="mr-1" />
-                    <span>June 20, 2023</span>
+                    <span>{event.date}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">

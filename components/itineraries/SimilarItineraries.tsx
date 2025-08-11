@@ -1,3 +1,4 @@
+"use client";
 import { ItineraryMany } from "@/interfaces";
 import { itineraries } from "@/mock/itineraries";
 import { MapPinIcon, StarIcon } from "lucide-react";
@@ -10,7 +11,7 @@ function SimilarItineraries() {
       <h2 className="text-2xl font-bold mb-6">Similar Itineraries</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
         {/* This would typically be populated with actual similar itineraries */}
-        {itineraries.slice(0, 5).map((item: ItineraryMany, index: number) => (
+        {itineraries.slice(0, 5).map((item: ItineraryMany) => (
           <div key={item.id} className="overflow-hidden">
             <div className="relative">
               <Image

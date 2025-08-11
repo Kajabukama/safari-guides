@@ -1,23 +1,7 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
-import { SearchIcon, FilterIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { FilterOptions } from "@/interfaces";
 
-interface GuidesHeroSectionProps {
-  searchTerm: string;
-  onSearchChange: (value: string) => void;
-  onSearch: () => void;
-  onFilters: () => void;
-}
-
-const GuidesHeroSection: React.FC<GuidesHeroSectionProps> = ({
-  searchTerm,
-  onSearchChange,
-  onSearch,
-  onFilters,
-}) => {
+const GuidesHeroSection = () => {
   return (
     <div
       className="py-16 h-[35vh]"

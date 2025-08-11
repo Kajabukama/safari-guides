@@ -1,40 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { useMediaQuery } from "@/hooks/use-media-query";
+
+import React from "react";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { ArrowRightIcon } from "lucide-react";
-import EventCard from "./EventCard";
+import EventCard from "@/components/events/EventCard";
 import Link from "next/link";
-import CarouselNavigation from "../CarouselNavigation";
+import CarouselNavigation from "@/components/CarouselNavigation";
+import { Event } from "@/interfaces/event";
 
-interface Event {
-  id: number;
-  title: string;
-  image: string;
-  date: string;
-  time: string;
-  location: string;
-  price: string;
-  guideId: number;
-  guideName: string;
-  guideImage: string;
-  description: string;
-}
-
-interface EventsSectionProps {
-  events: Event[];
-}
-
-const EventsSection: React.FC<EventsSectionProps> = ({ events }) => {
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
-  const isTablet = useMediaQuery("(min-width: 640px)");
-
+const EventsSection = ({ events }: { events: Event[] }) => {
   return (
     <section className="py-16">
       <div className="container mx-auto">
@@ -58,26 +32,14 @@ const EventsSection: React.FC<EventsSectionProps> = ({ events }) => {
           <Carousel
             opts={{
               align: "start",
-              slidesToScroll: isDesktop ? 4 : isTablet ? 2 : 1,
+              slidesToScroll: 1,
             }}
             className="w-full"
           >
             <CarouselContent className="relative mb-10">
               {events.map((event) => (
                 <CarouselItem key={event.id} className="pl-4 md:basis-1/2 lg:basis-1/5">
-                  <EventCard
-                    id={event.id}
-                    title={event.title}
-                    image={event.image}
-                    date={event.date}
-                    time={event.time}
-                    location={event.location}
-                    price={event.price}
-                    guideId={event.guideId}
-                    guideName={event.guideName}
-                    guideImage={event.guideImage}
-                    description={event.description}
-                  />
+                  <EventCard event={event} />
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -89,4 +51,4 @@ const EventsSection: React.FC<EventsSectionProps> = ({ events }) => {
   );
 };
 
-export default React.memo(EventsSection);
+export default EventsSection;

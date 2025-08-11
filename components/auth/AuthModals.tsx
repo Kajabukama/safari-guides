@@ -7,44 +7,16 @@ import {
   Phone as PhoneIcon,
   Globe as GlobeIcon,
   Facebook as FacebookIcon,
-  User as UserIcon,
   MapPin as MapPinIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
-
-type ModalType = "login" | "signup" | null;
-
-interface AuthModalsProps {
-  isOpen: boolean;
-  modalType: ModalType;
-  onClose: () => void;
-  onSwitchModal: (type: ModalType) => void;
-}
-
-interface LoginFormData {
-  email?: string;
-  phone?: string;
-  password: string;
-}
-
-interface SignupFormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  password: string;
-  confirmPassword: string;
-  location: string;
-  bio?: string;
-  userType: "traveler" | "guide";
-}
+import { AuthModalsProps, LoginFormData, SignupFormData } from "@/interfaces/auth";
 
 const AuthModals: React.FC<AuthModalsProps> = ({ isOpen, modalType, onClose, onSwitchModal }) => {
   const loginForm = useForm<LoginFormData>();
@@ -52,13 +24,11 @@ const AuthModals: React.FC<AuthModalsProps> = ({ isOpen, modalType, onClose, onS
 
   const onLoginSubmit = (data: LoginFormData) => {
     console.log("Login data:", data);
-    // Handle login logic here
     onClose();
   };
 
   const onSignupSubmit = (data: SignupFormData) => {
     console.log("Signup data:", data);
-    // Handle signup logic here
     onClose();
   };
 
@@ -178,7 +148,7 @@ const AuthModals: React.FC<AuthModalsProps> = ({ isOpen, modalType, onClose, onS
               </div>
 
               <div className="text-center">
-                <span className="text-muted-foreground">Don't have an account? </span>
+                <span className="text-muted-foreground">Don&apos;t have an account? </span>
                 <button
                   type="button"
                   className="font-medium hover:underline"
@@ -214,7 +184,7 @@ const AuthModals: React.FC<AuthModalsProps> = ({ isOpen, modalType, onClose, onS
                         <div className="flex flex-col space-y-1">
                           <div className="font-medium">Traveler</div>
                           <div className="text-sm text-muted-foreground">
-                            I'm looking for guides and experiences
+                            I&apos;m looking for guides and experiences
                           </div>
                         </div>
                       </Label>

@@ -1,5 +1,5 @@
+"use client";
 import React from "react";
-import { Card } from "@/components/ui/card";
 import { MapPinIcon } from "lucide-react";
 import { StarIcon } from "lucide-react";
 import { Service } from "@/interfaces";

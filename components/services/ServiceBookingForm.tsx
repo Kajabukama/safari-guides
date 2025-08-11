@@ -1,22 +1,27 @@
 "use client";
 import React, { useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { service } from "@/mock/service";
 import { motion } from "framer-motion";
 import { MessageSquareIcon, CalendarIcon, ChevronDownIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { useForm } from "react-hook-form";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form";
-import { Input } from "@/components/ui/input";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { format, addDays } from "date-fns";
-import { Calendar } from "../ui/calendar";
+import { Calendar } from "@/components/ui/calendar";
 
 type DateRange = {
   from: Date | undefined;
   to?: Date | undefined;
 };
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
 
 function ServiceBookingForm() {
@@ -44,7 +49,7 @@ function ServiceBookingForm() {
     },
   };
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: unknown) => {
     console.log(data);
     openLoginModal();
   };
@@ -92,6 +97,7 @@ function ServiceBookingForm() {
                                 <Calendar
                                   mode="single"
                                   selected={date.from}
+                                  {...field}
                                   captionLayout="dropdown"
                                   onSelect={(date) => {
                                     setDate({ from: date, to: undefined });
@@ -132,6 +138,7 @@ function ServiceBookingForm() {
                                   mode="single"
                                   selected={date.from}
                                   captionLayout="dropdown"
+                                  {...field}
                                   onSelect={(date) => {
                                     setDate({ from: date, to: undefined });
                                     setOpen(false);

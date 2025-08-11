@@ -5,36 +5,6 @@ import { Service } from "@/interfaces";
 import Link from "next/link";
 
 const ServiceCard = ({ service }: { service: Service }) => {
-  const getServiceIcon = () => {
-    switch (service.type) {
-      case "accommodation":
-        return (
-          <span className="text-sm font-medium px-2 py-1 bg-blue-100 text-blue-800 rounded-full">
-            Accommodation
-          </span>
-        );
-      case "food":
-        return (
-          <span className="text-sm font-medium px-2 py-1 bg-orange-100 text-orange-800 rounded-full">
-            Food
-          </span>
-        );
-      case "transport":
-        return (
-          <span className="text-sm font-medium px-2 py-1 bg-purple-100 text-purple-800 rounded-full">
-            Transport
-          </span>
-        );
-      case "equipment":
-        return (
-          <span className="text-sm font-medium px-2 py-1 bg-green-100 text-green-800 rounded-full">
-            Equipment
-          </span>
-        );
-      default:
-        return null;
-    }
-  };
   return (
     <div className="group relative overflow-hidden rounded-lg shadow-md aspect-[3/4] w-full">
       <Link href={`/services/${service.id}`}>

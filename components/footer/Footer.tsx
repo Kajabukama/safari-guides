@@ -3,11 +3,8 @@ import Link from "next/link";
 import { FacebookIcon, InstagramIcon, TwitterIcon, GlobeIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { guides } from "@/mock/guides-list";
-import { itineraries } from "@/mock/itineraries";
-import Image from "next/image";
-import UniqueGuidesTab from "./UniqueGuidesTab";
-import UniqueItinerariesTab from "./UniqueItinerariesTab";
+import UniqueGuidesTab from "@/components/footer/UniqueGuidesTab";
+import UniqueItinerariesTab from "@/components/footer/UniqueItinerariesTab";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

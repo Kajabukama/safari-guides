@@ -1,3 +1,4 @@
+"use client";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -11,6 +12,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { User } from "@/interfaces/index";
 import Link from "next/link";
+import Image from "next/image";
 
 interface UserAuthActionsProps {
   user: User | null;
@@ -24,7 +26,15 @@ function UserAuthActions({ user, logout }: UserAuthActionsProps) {
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon" className="rounded-full h-10 w-10 p-0">
             {user?.avatar ? (
-              <img src={user.avatar} alt={user.name} className="w-full h-full rounded-full" />
+              <Image
+                width={400}
+                height={400}
+                src={user.avatar}
+                alt={user.name}
+                className="w-full h-full rounded-full object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority
+              />
             ) : (
               <div className="w-full h-full rounded-full bg-stone-100 flex items-center justify-center">
                 <UserRoundIcon className="size-6 text-stone-600" />

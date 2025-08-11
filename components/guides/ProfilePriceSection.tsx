@@ -1,4 +1,4 @@
-import { Guide } from "@/interfaces";
+"use client";
 import React from "react";
 
 function ProfilePriceSection({ price }: { price: string }) {

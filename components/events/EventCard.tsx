@@ -1,42 +1,18 @@
+"use client";
 import React from "react";
 import Image from "next/image";
-import { CalendarIcon, ClockIcon, MapPinIcon } from "lucide-react";
+import { CalendarIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
+import { Event } from "@/interfaces/event";
 
-export interface EventProps {
-  id: number;
-  title: string;
-  image: string;
-  date: string;
-  time: string;
-  location: string;
-  price: string;
-  guideId: number;
-  guideName: string;
-  guideImage: string;
-  description: string;
-}
-
-const EventCard: React.FC<EventProps> = ({
-  id,
-  title,
-  image,
-  date,
-  time,
-  location,
-  price,
-  guideId,
-  guideName,
-  guideImage,
-  description,
-}) => {
+const EventCard = ({ event }: { event: Event }) => {
   return (
-    <Link href={`/events/${id}`}>
+    <Link href={`/events/${event.id}`}>
       <div className="group relative overflow-hidden rounded-lg shadow-md aspect-[3/4] w-full h-72">
         <div className="relative w-full h-full">
           <Image
-            src={image}
-            alt={title}
+            src={event.images[0]}
+            alt={event.title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-110"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -47,19 +23,19 @@ const EventCard: React.FC<EventProps> = ({
           <div className="absolute inset-0 p-4 flex flex-col justify-between">
             <div className="flex justify-between items-start">
               <div className="bg-white/90 text-stone-900 text-xs font-medium px-2 py-1 rounded-full">
-                {price}
+                {event.price}
               </div>
               <div className="bg-stone-900/80 text-white text-xs px-2 py-1 rounded-full flex items-center">
                 <CalendarIcon className="w-3 h-3 mr-1" />
-                {date}
+                {event.date}
               </div>
             </div>
 
             <div className="text-white">
-              <h3 className="text-base mb-1 line-clamp-2">{title}</h3>
+              <h3 className="text-base mb-1 line-clamp-2">{event.title}</h3>
               <div className="flex items-center text-sm text-white/80">
                 <MapPinIcon className="w-3.5 h-3.5 mr-1" />
-                <span className="truncate">{location}</span>
+                <span className="truncate">{event.location}</span>
               </div>
             </div>
           </div>
@@ -69,4 +45,4 @@ const EventCard: React.FC<EventProps> = ({
   );
 };
 
-export default React.memo(EventCard);
+export default EventCard;

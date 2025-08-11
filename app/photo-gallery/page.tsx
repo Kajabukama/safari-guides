@@ -122,15 +122,18 @@ export default function PhotoGallery() {
               <CameraIcon size={48} className="text-stone-300 mb-4" />
               <h3 className="text-xl font-semibold mb-2 text-stone-800">No photos found</h3>
               <p className="text-stone-600 mb-6 max-w-md">
-                We couldn't find any photos matching your search criteria
+                We couldn&apos;t find any photos matching your search criteria
               </p>
               <Button
                 variant="outline"
                 onClick={() => {
                   setSearchTerm("");
+                  setAllTags([]);
+                  handleSearch();
+                  handleFilterClick();
                   setSelectedCategory("all");
                 }}
-                className="text-stone-800 hover:bg-stone-100"
+                className="hover:bg-stone-100"
               >
                 Clear all filters
               </Button>
@@ -167,8 +170,8 @@ export default function PhotoGallery() {
               once: true,
             }}
           >
-            <h2 className="text-3xl font-bold mb-4 text-stone-900">Share Your Safari Experience</h2>
-            <p className="text-stone-600 text-lg mb-8 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold mb-4">Share Your Safari Experience</h2>
+            <p className="text-lg mb-8 max-w-2xl mx-auto">
               Have amazing photos from your Safari adventure? Join our community and share them with
               fellow travelers
             </p>

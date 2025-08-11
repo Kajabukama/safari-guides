@@ -1,6 +1,6 @@
 "use client";
 import React, { useMemo } from "react";
-import { m, LazyMotion, domAnimation, motion } from "framer-motion";
+import { LazyMotion, domAnimation, motion } from "framer-motion";
 import { ArrowRightIcon } from "lucide-react";
 import ServiceCard from "@/components/services/ServiceCard";
 import { Service } from "@/interfaces";
@@ -52,7 +52,7 @@ const ServicesSection = ({ services }: { services: Service[] }) => {
           },
         },
       } as const),
-    [services]
+    []
   );
 
   return (

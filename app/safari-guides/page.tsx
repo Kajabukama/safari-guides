@@ -20,7 +20,7 @@ const Guides = () => {
 
   // Filter guides based on search and filters
   const filteredGuides = useMemo(() => {
-    let filtered = guides.filter((guide) => {
+    const filtered = guides.filter((guide) => {
       const matchesSearch =
         guide.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         guide.specialties.some((s) => s.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -32,9 +32,27 @@ const Guides = () => {
         parseInt(guide.price.replace("$", "")) >= priceRange[0] &&
         parseInt(guide.price.replace("$", "")) <= priceRange[1];
       const matchesVerified = !verifiedOnly || guide.verified;
+      const matchesExperience =
+        selectedExperience === "" || guide.experience === selectedExperience;
+      const matchesLanguage =
+        selectedLanguage === "" || guide.languages.some((l) => l === selectedLanguage);
+      const matchesTourType =
+        selectedTourType === "" || guide.tourType === selectedTourType;
+      const matchesGroupSize =
+        selectedGroupSize === "" || guide.groupSize === selectedGroupSize;
+      const matchesAvailable = !availableOnly || guide.available;
 
       return (
-        matchesSearch && matchesLocation && matchesSpecialty && matchesPrice && matchesVerified
+        matchesSearch &&
+        matchesLocation &&
+        matchesSpecialty &&
+        matchesPrice &&
+        matchesVerified &&
+        matchesExperience &&
+        matchesLanguage &&
+        matchesTourType &&
+        matchesGroupSize &&
+        matchesAvailable
       );
     });
 

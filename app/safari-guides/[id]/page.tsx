@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { useParams } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { guide } from "@/mock/guide-profile";
 import GuideHero from "@/components/guides/GuideHero";
@@ -10,10 +9,11 @@ import GuideToursServices from "@/components/guides/GuideToursServices";
 import GuideReviews from "@/components/guides/GuideReviews";
 import GuideGallery from "@/components/guides/GuideGallery";
 
-const GuideProfile = () => {
-  const { id } = useParams();
-  const [activeTab, setActiveTab] = useState("about");
+export default function GuideProfile() {
   const [isLiked, setIsLiked] = useState(false);
+  const handleTabChange = (tab: string) => {
+    console.log(tab);
+  };
 
   // In a real app, handle loading and error states
   if (!guide) {
@@ -46,7 +46,7 @@ const GuideProfile = () => {
 
         {/* Tabs Navigation */}
         <div className="mb-8">
-          <Tabs defaultValue="about" onValueChange={setActiveTab} className="w-full">
+          <Tabs defaultValue="about" onValueChange={handleTabChange} className="w-full">
             <TabsList className="w-full flex gap-2 overflow-x-auto">
               <TabsTrigger value="about">About</TabsTrigger>
               <TabsTrigger value="tours">Tours & Services</TabsTrigger>
@@ -82,6 +82,4 @@ const GuideProfile = () => {
       </div>
     </div>
   );
-};
-
-export default GuideProfile;
+}

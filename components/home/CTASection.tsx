@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 const CTASection: React.FC = () => {
   return (
@@ -39,7 +39,7 @@ const CTASection: React.FC = () => {
             once: true,
           }}
         >
-          Ready to Explore Tanzania with a Local?
+          Ready to Explore Africa with a Local?
         </motion.h2>
         <motion.p
           className="text-xl mb-8 max-w-2xl mx-auto"
@@ -59,7 +59,7 @@ const CTASection: React.FC = () => {
             once: true,
           }}
         >
-          Connect with our experienced guides and start planning your authentic Tanzanian adventure
+          Connect with our experienced guides and start planning your authentic African adventure
           today.
         </motion.p>
         <motion.div

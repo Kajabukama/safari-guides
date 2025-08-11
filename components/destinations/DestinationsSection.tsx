@@ -1,14 +1,8 @@
 "use client";
 import React from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import DestinationCard from "./DestinationCard";
-import CarouselNavigation from "../CarouselNavigation";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import DestinationCard from "@/components/destinations/DestinationCard";
+import CarouselNavigation from "@/components/CarouselNavigation";
 
 interface Destination {
   id: number;
@@ -29,7 +23,7 @@ const DestinationsSection = ({ destinations }: DestinationsSectionProps) => {
         <div className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Popular Destinations</h2>
           <p className="text-muted-foreground">
-            Discover Tanzania's most breathtaking locations with our expert local guides
+            Discover Africa&apos;s most breathtaking locations with our expert local guides
           </p>
         </div>
 

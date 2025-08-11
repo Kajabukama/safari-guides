@@ -1,15 +1,10 @@
 "use client";
-import React, { useState, Children } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useParams } from "next/navigation";
-import Link from "next/link";
 import {
   StarIcon,
   MapPinIcon,
-  HeartIcon,
-  ShareIcon,
   CheckCircleIcon,
-  MessageSquareIcon,
   UtensilsIcon,
   WifiIcon,
   TvIcon,
@@ -17,10 +12,8 @@ import {
   UsersIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import LocationMap from "@/components/maps/LocationMap";
-import { useAuth } from "@/components/providers/AuthProvider";
 import { service } from "@/mock/service";
 import Image from "next/image";
 import ServiceImageSlider from "@/components/services/ServiceImageSlider";
@@ -28,13 +21,7 @@ import ServiceBookingForm from "@/components/services/ServiceBookingForm";
 import SimilarServicesList from "@/components/services/SimilarServicesList";
 
 const ServiceDetail = () => {
-  const { id } = useParams<{
-    id: string;
-  }>();
-
   const [isLiked, setIsLiked] = useState(false);
-  // In a real app, this data would be fetched from an API
-
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   // Animation variants
   const fadeIn = {
@@ -50,7 +37,6 @@ const ServiceDetail = () => {
       },
     },
   };
-  // Function to get appropriate icon based on feature text
   const getFeatureIcon = (feature: string) => {
     if (feature.toLowerCase().includes("bathroom") || feature.toLowerCase().includes("shower")) {
       return <div className="text-emerald-600 mr-2" />;
@@ -68,7 +54,6 @@ const ServiceDetail = () => {
   };
   return (
     <div className="min-h-screen">
-      {/* Image Gallery */}
       <ServiceImageSlider
         service={service}
         activeImageIndex={activeImageIndex}
@@ -78,7 +63,6 @@ const ServiceDetail = () => {
       />
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
-          {/* Main Content */}
           <div className="lg:col-span-2">
             <motion.div variants={fadeIn} initial="hidden" animate="visible">
               <div className="flex justify-between items-start mb-2">
@@ -95,12 +79,14 @@ const ServiceDetail = () => {
                 <MapPinIcon size={18} className="mr-1" />
                 <span>{service.location}</span>
               </div>
-              {/* Service Provider Information */}
               <div className="flex items-center mb-6">
-                <img
+                <Image
                   src={service.guideImage}
                   alt={service.guideName}
                   className="w-12 h-12 rounded-full object-cover mr-4"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  width={1920}
+                  height={1080}
                 />
                 <div>
                   <p className="font-medium">Provided by {service.guideName}</p>
@@ -109,14 +95,12 @@ const ServiceDetail = () => {
                   </p>
                 </div>
               </div>
-              {/* Description */}
               <div className="mb-8">
                 <h2 className="text-xl font-semibold mb-4">
                   About This {service.type === "accommodation" ? "Accommodation" : "Service"}
                 </h2>
                 <p className="whitespace-pre-line">{service.description}</p>
               </div>
-              {/* Tabs */}
               <Tabs defaultValue="features" className="mb-8">
                 <TabsList className="w-full md:w-auto">
                   <TabsTrigger value="features">Features</TabsTrigger>
@@ -125,7 +109,6 @@ const ServiceDetail = () => {
                   <TabsTrigger value="reviews">Reviews</TabsTrigger>
                   <TabsTrigger value="faq">FAQ</TabsTrigger>
                 </TabsList>
-                {/* Features Tab */}
                 <TabsContent value="features" className="mt-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {service.features?.map((feature, index) => (
@@ -136,7 +119,6 @@ const ServiceDetail = () => {
                     ))}
                   </div>
                 </TabsContent>
-                {/* Rooms Tab */}
                 <TabsContent value="rooms" className="mt-6">
                   <div className="space-y-6">
                     {service.rooms?.map((room, index) => (
@@ -181,7 +163,6 @@ const ServiceDetail = () => {
                     ))}
                   </div>
                 </TabsContent>
-                {/* Policies Tab */}
                 <TabsContent value="policies" className="mt-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="bg-card p-4 rounded-2xl">
@@ -209,7 +190,6 @@ const ServiceDetail = () => {
                     </div>
                   </div>
                 </TabsContent>
-                {/* Reviews Tab */}
                 <TabsContent value="reviews" className="mt-6">
                   <div className="mb-6">
                     <div className="flex items-center mb-4">
@@ -279,7 +259,6 @@ const ServiceDetail = () => {
                     ))}
                   </div>
                 </TabsContent>
-                {/* FAQ Tab */}
                 <TabsContent value="faq" className="mt-6">
                   <div className="space-y-6">
                     {service.faqs?.map((faq, index) => (
@@ -291,7 +270,6 @@ const ServiceDetail = () => {
                   </div>
                 </TabsContent>
               </Tabs>
-              {/* Map */}
               <div className="mb-8">
                 <h2 className="text-xl font-semibold mb-4">Location</h2>
                 <LocationMap
@@ -301,10 +279,8 @@ const ServiceDetail = () => {
               </div>
             </motion.div>
           </div>
-          {/* Booking Card */}
           <ServiceBookingForm />
         </div>
-        {/* Similar Services */}
         <SimilarServicesList service={service} />
       </div>
     </div>

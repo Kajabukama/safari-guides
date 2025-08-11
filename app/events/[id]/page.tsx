@@ -12,7 +12,6 @@ import {
   CheckCircleIcon,
   UserRoundIcon,
 } from "lucide-react";
-import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import LocationMap from "@/components/maps/LocationMap";
 import Image from "next/image";

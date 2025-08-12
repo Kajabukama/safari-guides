@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Guide } from "@/interfaces";
+import { Guide } from "@/interfaces/guide";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Select,

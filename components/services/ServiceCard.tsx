@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { StarIcon, MapPinIcon } from "lucide-react";
-import { Service } from "@/interfaces";
+import { Service } from "@/interfaces/service";
 import Link from "next/link";
 
 const ServiceCard = ({ service }: { service: Service }) => {

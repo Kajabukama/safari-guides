@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { Service } from "@/interfaces";
+import { Service } from "@/interfaces/service";
 import { HeartIcon, ShareIcon } from "lucide-react";
 import SliderThumbnail from "@/components/SliderThumbnail";
 

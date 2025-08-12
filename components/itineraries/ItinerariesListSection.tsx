@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import ItineraryCard from "@/components/itineraries/ItineraryCard";
-import { ItineraryMany } from "@/interfaces";
+import { ItineraryMany } from "@/interfaces/itinerary";
 
 interface ItinerariesListSectionProps {
   itineraries: ItineraryMany[];

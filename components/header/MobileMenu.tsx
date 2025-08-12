@@ -10,7 +10,7 @@ import {
 import { MenuIcon, XIcon, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { User } from "@/interfaces";
+import { User } from "@/interfaces/auth";
 
 interface MobileMenuProps {
   isMenuOpen: boolean;

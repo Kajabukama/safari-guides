@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import { LazyMotion, domAnimation, motion } from "framer-motion";
 import { ArrowRightIcon } from "lucide-react";
 import ServiceCard from "@/components/services/ServiceCard";
-import { Service } from "@/interfaces";
+import { Service } from "@/interfaces/service";
 
 const ServicesSection = ({ services }: { services: Service[] }) => {
   const container = useMemo(

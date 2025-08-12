@@ -2,7 +2,7 @@
 import React from "react";
 import { MapPinIcon } from "lucide-react";
 import { StarIcon } from "lucide-react";
-import { Service } from "@/interfaces";
+import { Service } from "@/interfaces/service";
 import Image from "next/image";
 
 function SimilarServicesList({ service }: { service: Service }) {

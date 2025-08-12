@@ -10,7 +10,7 @@ import {
 import { UserRoundIcon } from "lucide-react";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { User } from "@/interfaces/index";
+import { User } from "@/interfaces/auth";
 import Link from "next/link";
 import Image from "next/image";
 

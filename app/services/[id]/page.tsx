@@ -111,7 +111,7 @@ const ServiceDetail = () => {
                 </TabsList>
                 <TabsContent value="features" className="mt-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {service.features?.map((feature, index) => (
+                    {service.features?.map((feature: string, index: number) => (
                       <div key={index} className="flex items-start text-base">
                         {getFeatureIcon(feature)}
                         <span>{feature}</span>

@@ -1,4 +1,4 @@
-import { Service } from "@/interfaces";
+import { Service } from "@/interfaces/service";
 
 export const service: Service = {
   id: "1",

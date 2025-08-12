@@ -5,7 +5,7 @@ const GuidesHeroSection = () => {
     <div
       className="py-16 h-[35vh]"
       style={{
-        backgroundImage: `url('/images/img28.jpg')`,
+        backgroundImage: `url('/images/img12.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         position: "relative",

@@ -53,6 +53,17 @@ const Footer = () => {
     { name: "Hiking Expeditions", href: "/experiences/hiking" },
     { name: "Beach Getaways", href: "/experiences/beach" },
     { name: "Cultural Tours", href: "/experiences/cultural" },
+    { name: "Ngorgororo Crater", href: "/experiences/ngorgororo-crater" },
+    { name: "Serengeti Migration", href: "/experiences/serengeti-migration" },
+  ];
+
+  const countries = [
+    { name: "Tanzania", href: "/destinations/tanzania" },
+    { name: "Zambia", href: "/destinations/zambia" },
+    { name: "Zimbabwe", href: "/destinations/zimbabwe" },
+    { name: "Uganda", href: "/destinations/uganda" },
+    { name: "Kenya", href: "/destinations/kenya" },
+    { name: "Ethiopia", href: "/destinations/ethiopia" },
   ];
 
   return (
@@ -161,6 +172,18 @@ const Footer = () => {
                 {experiences.map((exp) => (
                   <Link key={exp.name} href={exp.href} className="text-sm">
                     {exp.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* countries */}
+            <div>
+              <h3 className="text-sm font-semibold mb-4 uppercase">Countries</h3>
+              <div className="grid grid-cols-2 gap-2">
+                {countries.map((country) => (
+                  <Link key={country.name} href={country.href} className="text-sm">
+                    {country.name}
                   </Link>
                 ))}
               </div>

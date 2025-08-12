@@ -19,7 +19,7 @@ const ItineraryCard = ({ itinerary }: { itinerary: ItineraryMany }) => {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={false}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
 
           <div className="absolute inset-0 p-4 flex flex-col justify-between">
             <div className="flex justify-between items-start">
@@ -33,7 +33,7 @@ const ItineraryCard = ({ itinerary }: { itinerary: ItineraryMany }) => {
             </div>
 
             <div className="text-white">
-              <h3 className="text-base mb-1">{itinerary?.title}</h3>
+              {/* <h3 className="text-base mb-1">{itinerary?.title}</h3> */}
               {/* <div className="flex items-center text-sm text-white/80 mb-2">
               <MapPinIcon className="w-3.5 h-3.5 mr-1 flex-shrink-0" />
               <span className="truncate">{location}</span>

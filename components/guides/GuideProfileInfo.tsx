@@ -41,7 +41,7 @@ const GuideProfileInfo: React.FC<GuideProfileInfoProps> = ({ guide }) => {
                 alt={guide.name}
                 width={160}
                 height={160}
-                className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-4 border-white shadow-none"
+                className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full"
               />
               {guide.verified && (
                 <div className="absolute top-0 right-3 bg-primary text-primary-foreground p-1 border-4 border-white rounded-full">

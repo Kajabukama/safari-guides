@@ -276,8 +276,8 @@ const EventDetail = () => {
         {/* Similar Events */}
         <div className="mt-16">
           <h2 className="text-2xl font-bold mb-6">Similar Events</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6">
-            {events.map((event: Event, index: number) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
+            {events.slice(0, 6).map((event: Event, index: number) => (
               <SimilarEvents key={index} event={event} />
             ))}
           </div>

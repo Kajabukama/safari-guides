@@ -7,17 +7,17 @@ import { CalendarIcon, MapPinIcon } from "lucide-react";
 function SimilarEvents({ event }: { event: Event }) {
   return (
     <div className="overflow-hidden">
-      <div className="relative">
+      <div className="relative overflow-hidden rounded-2xl aspect-[4/4]">
         <Image
           width={1800}
           height={1200}
           src={event.images[0]}
           alt={`Similar Event ${event.title}`}
-          className="w-full h-48 object-cover"
+          className="w-full h-full object-cover"
         />
       </div>
       <div className="p-4">
-        <h3 className="font-semibold mb-1">{event.title}</h3>
+        <h3 className="font-semibold text-sm mb-1">{event.title}</h3>
         <div className="flex items-center text-muted-foreground text-sm mb-2">
           <CalendarIcon size={14} className="mr-1" />
           <span>{event.date}</span>

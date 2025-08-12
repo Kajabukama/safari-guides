@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import GuideCard from "@/components/guides/GuideCard";
-import { Guide } from "@/interfaces";
+import { Guide } from "@/interfaces/guide";
 import {
   Select,
   SelectContent,
@@ -43,7 +43,7 @@ const GuidesListSection: React.FC<GuidesListSectionProps> = ({
 
   return (
     <div className="lg:w-3/4">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-0">
         <h2 className="text-xl font-semibold">{guides.length} guides available</h2>
         <div className="flex items-center gap-2">
           <Label className="text-sm font-medium">Sort by:</Label>
@@ -68,16 +68,7 @@ const GuidesListSection: React.FC<GuidesListSectionProps> = ({
       >
         {guides.slice(0, 10).map((guide) => (
           <motion.div key={guide.id} variants={itemVariants}>
-            <GuideCard
-              id={guide.id}
-              name={guide.name}
-              image={guide.image}
-              location={guide.location}
-              rating={guide.rating}
-              specialties={guide.specialties}
-              price={guide.price}
-              verified={guide.verified}
-            />
+            <GuideCard guide={guide} />
           </motion.div>
         ))}
       </motion.div>

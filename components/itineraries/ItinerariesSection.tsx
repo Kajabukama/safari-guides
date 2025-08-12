@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 import ItineraryCard from "@/components/itineraries/ItineraryCard";
-import { ItineraryMany } from "@/interfaces";
+import { ItineraryMany } from "@/interfaces/itinerary";
 
 interface ItinerariesSectionProps {
   itineraries: ItineraryMany[];

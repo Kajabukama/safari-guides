@@ -7,6 +7,13 @@ export interface AuthModalsProps {
   onSwitchModal: (type: ModalType) => void;
 }
 
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar?: string;
+}
+
 export interface LoginFormData {
   email?: string;
   phone?: string;

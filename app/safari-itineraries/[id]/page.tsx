@@ -221,12 +221,12 @@ const ItineraryDetail = () => {
                       <span className="ml-1 text-gray-600">({itinerary.reviewCount} reviews)</span>
                     </div>
                   </div>
-                  <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                     {itinerary.reviews.map((review) => (
                       <div className="flex-grow" key={review.id}>
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                           <div className="flex items-center gap-x-2">
-                            <div className="relative size-14 aspect-square">
+                            <div className="relative size-12 aspect-square">
                               <Image
                                 src={review.image}
                                 alt={review.name}
@@ -260,7 +260,7 @@ const ItineraryDetail = () => {
                             ))}
                           </div>
                         </div>
-                        <p className="text-muted-foreground">{review.text}</p>
+                        <p className="text-muted-foreground ">{review.text}</p>
                       </div>
                     ))}
                   </div>

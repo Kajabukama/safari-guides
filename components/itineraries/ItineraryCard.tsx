@@ -2,50 +2,38 @@
 
 import React from "react";
 import Image from "next/image";
-import { StarIcon } from "lucide-react";
 import Link from "next/link";
-import { ItineraryMany } from "@/interfaces";
+import { ItineraryMany } from "@/interfaces/itinerary";
+import RatingBadge from "@/components/RatingBadge";
 
 const ItineraryCard = ({ itinerary }: { itinerary: ItineraryMany }) => {
   return (
-    <Link href={`/safari-itineraries/${itinerary?.id}`}>
-      <div className="group relative overflow-hidden rounded-xl aspect-[4/4] w-full">
-        <div className="relative w-full h-full">
+    <Link href={`/safari-itineraries/${itinerary?.id}`} className="block group">
+      <div className="overflow-hidden">
+        <div className="relative aspect-square rounded-2xl overflow-hidden">
           <Image
             src={itinerary?.image}
             alt={itinerary?.title}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            className="object-cover transition-all duration-300 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={false}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
 
-          <div className="absolute inset-0 p-4 flex flex-col justify-between">
-            <div className="flex justify-between items-start">
-              <div className="bg-white/90 text-stone-900 text-xs font-medium px-2 py-1 rounded-full">
-                {itinerary?.duration}
-              </div>
-              <div className="bg-stone-900/80 text-white text-xs px-2 py-1 rounded-full flex items-center">
-                <StarIcon className="w-3 h-3 mr-1 fill-yellow-400 text-yellow-400" />
-                {itinerary?.rating}
-              </div>
-            </div>
+          {/* Duration badge */}
+          <div className="absolute top-2 left-2 bg-white/90 text-stone-900 text-xs font-medium px-2 py-1 rounded-full">
+            {itinerary?.duration}
+          </div>
 
-            <div className="text-white">
-              {/* <h3 className="text-base mb-1">{itinerary?.title}</h3> */}
-              {/* <div className="flex items-center text-sm text-white/80 mb-2">
-              <MapPinIcon className="w-3.5 h-3.5 mr-1 flex-shrink-0" />
-              <span className="truncate">{location}</span>
-            </div> */}
-              {/* <div className="flex items-center justify-between text-sm">
-              <div className="flex items-center text-white/90">
-                <UsersIcon className="w-3.5 h-3.5 mr-1" />
-                <span>Max {maxGuests}</span>
-              </div>
-              <div className="font-semibold">{price}</div>
-            </div> */}
-            </div>
+          {/* Rating badge */}
+          <RatingBadge rating={itinerary?.rating} />
+        </div>
+
+        {/* Itinerary info below image */}
+        <div className="mt-3 px-1">
+          <h3 className="font-semibold line-clamp-1">{itinerary?.title}</h3>
+          <div className="text-sm text-muted-foreground">
+            {itinerary?.price} • Max {itinerary?.maxGuests} guests
           </div>
         </div>
       </div>

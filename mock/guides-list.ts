@@ -1,7 +1,9 @@
-export const guides = [
+import { Guide } from "@/interfaces/guide";
+
+export const guides: Guide[] = [
   // Original guides (1-8)
   {
-    id: 1,
+    id: "1",
     name: "Emmanuel Mbogo",
     image: "/images/guide1.jpg",
     location: "Serengeti National Park",
@@ -16,7 +18,7 @@ export const guides = [
     available: true,
   },
   {
-    id: 2,
+    id: "2",
     name: "Amina Hussein",
     image: "/images/guide2.jpg",
     location: "Zanzibar",
@@ -31,7 +33,7 @@ export const guides = [
     available: true,
   },
   {
-    id: 3,
+    id: "3",
     name: "David Kimaro",
     image: "/images/guide3.jpg",
     location: "Mount Kilimanjaro",
@@ -46,7 +48,7 @@ export const guides = [
     available: true,
   },
   {
-    id: 4,
+    id: "4",
     name: "Grace Mwangi",
     image: "/images/guide4.jpg",
     location: "Ngorongoro Crater",
@@ -61,7 +63,7 @@ export const guides = [
     available: true,
   },
   {
-    id: 5,
+    id: "5",
     name: "John Masawe",
     image: "/images/guide5.jpg",
     location: "Serengeti National Park",
@@ -76,7 +78,7 @@ export const guides = [
     available: true,
   },
   {
-    id: 6,
+    id: "6",
     name: "Fatima Omar",
     image: "/images/guide6.jpg",
     location: "Zanzibar",
@@ -91,7 +93,7 @@ export const guides = [
     available: true,
   },
   {
-    id: 7,
+    id: "7",
     name: "Peter Mushi",
     image: "/images/guide7.jpg",
     location: "Mount Kilimanjaro",
@@ -106,7 +108,7 @@ export const guides = [
     available: true,
   },
   {
-    id: 8,
+    id: "8",
     name: "Sophia Kimathi",
     image: "/images/guide8.jpg",
     location: "Lake Manyara",
@@ -123,7 +125,7 @@ export const guides = [
 
   // Newly added guides (9-16)
   {
-    id: 9,
+    id: "9",
     name: "James Mwambene",
     image: "/images/guide1.jpg",
     location: "Ruaha National Park",
@@ -138,7 +140,7 @@ export const guides = [
     available: true,
   },
   {
-    id: 10,
+    id: "10",
     name: "Neema Charles",
     image: "/images/guide2.jpg",
     location: "Selous Game Reserve",
@@ -153,7 +155,7 @@ export const guides = [
     available: true,
   },
   {
-    id: 11,
+    id: "11",
     name: "Rajab Ally",
     image: "/images/guide3.jpg",
     location: "Pemba Island",
@@ -168,7 +170,7 @@ export const guides = [
     available: true,
   },
   {
-    id: 12,
+    id: "12",
     name: "Sarah Juma",
     image: "/images/guide4.jpg",
     location: "Arusha National Park",
@@ -183,7 +185,7 @@ export const guides = [
     available: true,
   },
   {
-    id: 13,
+    id: "13",
     name: "Michael Kileo",
     image: "/images/guide5.jpg",
     location: "Katavi National Park",
@@ -198,7 +200,7 @@ export const guides = [
     available: true,
   },
   {
-    id: 14,
+    id: "14",
     name: "Zahara Kombo",
     image: "/images/guide6.jpg",
     location: "Mafia Island",
@@ -213,7 +215,7 @@ export const guides = [
     available: true,
   },
   {
-    id: 15,
+    id: "15",
     name: "Richard Mboya",
     image: "/images/guide7.jpg",
     location: "Tarangire National Park",
@@ -228,7 +230,7 @@ export const guides = [
     available: true,
   },
   {
-    id: 16,
+    id: "16",
     name: "Asha Rajabu",
     image: "/images/guide8.jpg",
     location: "Mikumi National Park",

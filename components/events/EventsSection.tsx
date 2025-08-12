@@ -36,9 +36,9 @@ const EventsSection = ({ events }: { events: Event[] }) => {
             }}
             className="w-full"
           >
-            <CarouselContent className="relative mb-10">
+            <CarouselContent className="relative mb-20">
               {events.map((event) => (
-                <CarouselItem key={event.id} className="pl-4 md:basis-1/2 lg:basis-1/5">
+                <CarouselItem key={event.id} className="md:basis-2/2 lg:basis-1/5">
                   <EventCard event={event} />
                 </CarouselItem>
               ))}

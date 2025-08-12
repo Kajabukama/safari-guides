@@ -1,4 +1,4 @@
-import { ItineraryMany } from "@/interfaces";
+import { ItineraryMany } from "@/interfaces/itinerary";
 
 export const itineraries: ItineraryMany[] = [
   {

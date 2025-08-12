@@ -1,4 +1,5 @@
-import { ItineraryMany, Service } from "@/interfaces";
+import { ItineraryMany } from "@/interfaces/itinerary";
+import { Service } from "@/interfaces/service";
 
 export const destinations = [
   {

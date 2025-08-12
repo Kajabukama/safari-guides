@@ -1,5 +1,5 @@
 import React from "react";
-import { StarIcon, CheckIcon } from "lucide-react";
+import { StarIcon } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
@@ -32,7 +32,6 @@ const GuideCard: React.FC<GuideCardProps> = ({ name, image, rating, verified, id
           {/* Verified badge */}
           {verified && (
             <Badge className="absolute top-3 right-3 bg-white text-primary hover:bg-white">
-              {/* <CheckIcon size={14} className="mr-1" /> */}
               Verified
             </Badge>
           )}

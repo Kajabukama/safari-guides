@@ -19,7 +19,7 @@ import { Event } from "@/interfaces/event";
 import { events } from "@/mock/events";
 import SliderThumbnail from "@/components/SliderThumbnail";
 import EventBookingForm from "@/components/events/EventBookingForm";
-import SimilarEvents from "@/components/events/SimilarEvents";
+import EventCard from "@/components/events/EventCard";
 
 const EventDetail = () => {
   const [isLiked, setIsLiked] = useState(false);
@@ -278,7 +278,7 @@ const EventDetail = () => {
           <h2 className="text-2xl font-bold mb-6">Similar Events</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
             {events.slice(0, 6).map((event: Event, index: number) => (
-              <SimilarEvents key={index} event={event} />
+              <EventCard key={index} event={event} />
             ))}
           </div>
         </div>

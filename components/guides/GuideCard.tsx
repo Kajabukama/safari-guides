@@ -1,9 +1,9 @@
 import React from "react";
-import { StarIcon } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { Guide } from "@/interfaces/guide";
+import RatingBadge from "../RatingBadge";
+import VerifiedBadge from "./VerifiedBadge";
 
 const GuideCard = ({ guide }: { guide: Guide }) => {
   return (
@@ -19,22 +19,15 @@ const GuideCard = ({ guide }: { guide: Guide }) => {
           />
 
           {/* Verified badge */}
-          {guide.verified && (
-            <Badge className="absolute top-3 right-3 bg-white text-primary hover:bg-white">
-              Verified
-            </Badge>
-          )}
+          {guide.verified && <VerifiedBadge verified={guide.verified} />}
 
           {/* Rating overlay */}
-          <div className="absolute bottom-3 left-3 flex items-center bg-white backdrop-blur-sm rounded-full px-3 py-1.5">
-            <StarIcon size={16} className="text-yellow-500 fill-current mr-1" />
-            <span className="font-semibold text-sm text-gray-900">{guide.rating.toFixed(1)}</span>
-          </div>
+          <RatingBadge rating={guide.rating} />
         </div>
 
         {/* Guide info below image */}
         <div className="mt-3 px-1">
-          <h3 className="font-semibold text-gray-900 line-clamp-1">{guide.name}</h3>
+          <h3 className="font-semibold line-clamp-1">{guide.name}</h3>
           <div className="flex items-center gap-x-1 text-sm text-muted-foreground">
             Languages {" - "}
             {guide.languages.map((language) => (

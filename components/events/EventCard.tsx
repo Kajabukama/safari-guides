@@ -28,8 +28,8 @@ const EventCard = ({ event }: { event: Event }) => {
         </div>
       </div>
       <div className="p-3">
-        <h3 className="text-sm font-medium text-gray-900 mb-1 line-clamp-2">{event.title}</h3>
-        <div className="flex items-center text-sm text-gray-600">
+        <h3 className="text-sm font-medium mb-1 line-clamp-1">{event.title}</h3>
+        <div className="flex items-center text-sm">
           <MapPinIcon className="w-3.5 h-3.5 mr-1 flex-shrink-0" />
           <span className="truncate">{event.location}</span>
         </div>

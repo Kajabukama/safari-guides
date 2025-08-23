@@ -71,7 +71,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         {/* Inspiration for Travelers */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Safari Guides choice for Travelers</h2>
+          <h2 className="text-3xl font-bold mb-6">Guides.Africa choice for Travelers</h2>
           <Tabs defaultValue="guides" className="w-full">
             <TabsList className="mb-8">
               <TabsTrigger value="guides">Unique Guides</TabsTrigger>
@@ -151,8 +151,8 @@ const Footer = () => {
         <div className="border-t my-8"></div>
 
         {/* Middle Section */}
-        <div className="w-full flex items-center justify-between gap-8 mb-12">
-          <div className="flex w-full gap-x-20">
+        <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 mb-12">
+          <div className="flex flex-col lg:flex-row w-full gap-x-10 lg:gap-x-20">
             {/* Popular Destinations */}
             <div>
               <h3 className="text-sm font-semibold mb-4 uppercase">Popular Destinations</h3>

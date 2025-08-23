@@ -44,7 +44,7 @@ const GuideProfileInfo: React.FC<GuideProfileInfoProps> = ({ guide }) => {
                 className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full"
               />
               {guide.verified && (
-                <div className="absolute top-0 right-3 bg-primary text-primary-foreground p-1 border-4 border-white rounded-full">
+                <div className="absolute top-0 right-3 bg-primary text-primary-foreground p-1 border-4 border-white dark:border-black rounded-full">
                   <CheckIcon size={20} />
                 </div>
               )}

@@ -7,7 +7,7 @@ import { photos } from "@/mock/photos";
 import type { Photo } from "@/interfaces";
 import { CategoryTabs, TagsFilter, PhotoGrid } from "@/components/photo-gallery";
 import { Button } from "@/components/ui/button";
-import { CameraIcon } from "lucide-react";
+import { CameraIcon, Loader } from "lucide-react";
 import GalleryHero from "@/components/photo-gallery/GalleryHero";
 
 export default function PhotoGallery() {
@@ -82,10 +82,13 @@ export default function PhotoGallery() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="animate-pulse text-center">
-          <div className="w-16 h-16 bg-stone-100 rounded-full mx-auto mb-4"></div>
-          <div className="text-stone-900 font-medium">Loading gallery...</div>
+          <div className="w-16 h-16 rounded-full mx-auto mb-4"></div>
+          <div className="font-medium flex flex-col items-center gap-2">
+            <Loader size={24} />
+            Loading gallery...
+          </div>
         </div>
       </div>
     );

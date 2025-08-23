@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -14,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 
-const OrderConfirmation = () => {
+export default function OrderConfirmation() {
   const orderDetails = {
     orderNumber: "TG" + Math.floor(10000 + Math.random() * 90000),
     date: new Date().toLocaleDateString("en-US", {
@@ -258,5 +259,4 @@ const OrderConfirmation = () => {
       </div>
     </div>
   );
-};
-export default OrderConfirmation;
+}

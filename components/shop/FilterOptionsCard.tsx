@@ -91,7 +91,7 @@ function FilterOptionsCard({
       values.priceRange[1] !== current.priceRange[1] ||
       values.priceRange[0] !== current.priceRange[0]
     ) {
-      current.setPriceRange([...values.priceRange]);
+      current.setPriceRange([...values.priceRange] as [number, number]);
     }
     if (values.rating !== current.selectedRating) {
       current.setSelectedRating(values.rating);
@@ -101,12 +101,14 @@ function FilterOptionsCard({
   // Watch form changes and update parent state
   React.useEffect(() => {
     const { watch } = form;
-    const subscription = watch((values, { name }) => {
-      console.log(name);
-      if (values.category !== undefined && values.priceRange && values.rating !== undefined) {
-        handleChange(values as z.infer<typeof formSchema>);
+    const subscription = watch(
+      (values: Partial<z.infer<typeof formSchema>>, { name }: { name?: string }) => {
+        console.log(name);
+        if (values.category !== undefined && values.priceRange && values.rating !== undefined) {
+          handleChange(values as z.infer<typeof formSchema>);
+        }
       }
-    });
+    );
     return () => subscription.unsubscribe();
   }, [handleChange, form]); // Only handleChange is needed since form.watch is stable
 
@@ -174,7 +176,7 @@ function FilterOptionsCard({
                       max={5000}
                       step={10}
                       value={[field.value[1]]}
-                      onValueChange={(value) => {
+                      onValueChange={(value: number[]) => {
                         const newPriceRange: [number, number] = [0, value[0]];
                         field.onChange(newPriceRange);
                         setPriceRange(newPriceRange);
@@ -199,7 +201,7 @@ function FilterOptionsCard({
                 <FormLabel>Rating</FormLabel>
                 <FormControl>
                   <RadioGroup
-                    onValueChange={(value) => field.onChange(parseInt(value))}
+                    onValueChange={(value: string) => field.onChange(parseInt(value))}
                     value={field.value.toString()}
                     className="space-y-2"
                   >

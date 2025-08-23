@@ -81,7 +81,7 @@ function SigninForm({ onSwitchModal, onClose }: SigninFormProps) {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <Tabs
               value={loginMethod}
-              onValueChange={(value) => setLoginMethod(value as "email" | "phone")}
+              onValueChange={(value:string) => setLoginMethod(value as "email" | "phone")}
               className="w-full"
             >
               <TabsList className="">

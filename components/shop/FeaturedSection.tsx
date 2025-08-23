@@ -1,6 +1,6 @@
+"use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { fadeIn } from "@/components/shop/animations";
 import { collections } from "@/mock/shop";
 import { Collection } from "@/interfaces/product";
 import Link from "next/link";
@@ -8,8 +8,32 @@ import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 
 function FeaturedSection() {
+  const fadeIn = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+      },
+    },
+  };
+  const staggerContainer = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
   return (
-    <motion.section
+    <motion.div
       className="py-12 "
       initial="hidden"
       whileInView="visible"
@@ -57,7 +81,7 @@ function FeaturedSection() {
           ))}
         </div>
       </div>
-    </motion.section>
+    </motion.div>
   );
 }
 

@@ -8,7 +8,7 @@ import SigninForm from "@/components/auth/signin";
 
 const AuthModals: React.FC<AuthModalsProps> = ({ isOpen, modalType, onClose, onSwitchModal }) => {
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+    <Dialog open={isOpen} onOpenChange={(open: boolean) => !open && onClose()}>
       <DialogContent className="sm:max-w-xl">
         {modalType === "login" && <SigninForm onSwitchModal={onSwitchModal} onClose={onClose} />}
 

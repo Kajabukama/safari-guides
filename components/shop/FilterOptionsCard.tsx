@@ -108,7 +108,7 @@ function FilterOptionsCard({
       }
     });
     return () => subscription.unsubscribe();
-  }, [handleChange]); // Only handleChange is needed since form.watch is stable
+  }, [handleChange, form]); // Only handleChange is needed since form.watch is stable
 
   // Handle reset filters
   const handleReset = () => {

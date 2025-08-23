@@ -50,6 +50,28 @@ function FilterOptionsCard({
     },
   });
 
+  // Store latest values in refs to avoid stale closures
+  const latestValues = React.useRef({
+    selectedCategory,
+    priceRange,
+    selectedRating,
+    setSelectedCategory,
+    setPriceRange,
+    setSelectedRating,
+  });
+
+  // Update refs when props change
+  React.useEffect(() => {
+    latestValues.current = {
+      selectedCategory,
+      priceRange,
+      selectedRating,
+      setSelectedCategory,
+      setPriceRange,
+      setSelectedRating,
+    };
+  });
+
   // Update form values when props change
   React.useEffect(() => {
     form.reset({
@@ -59,18 +81,22 @@ function FilterOptionsCard({
     });
   }, [selectedCategory, priceRange, selectedRating, form]);
 
-  // Update parent state when form values change
-  const handleChange = (values: z.infer<typeof formSchema>) => {
-    if (values.category !== selectedCategory) {
-      setSelectedCategory(values.category);
+  // Update parent state when form values change (stable with empty deps)
+  const handleChange = React.useCallback((values: z.infer<typeof formSchema>) => {
+    const current = latestValues.current;
+    if (values.category !== current.selectedCategory) {
+      current.setSelectedCategory(values.category);
     }
-    if (values.priceRange[1] !== priceRange[1] || values.priceRange[0] !== priceRange[0]) {
-      setPriceRange([...values.priceRange]);
+    if (
+      values.priceRange[1] !== current.priceRange[1] ||
+      values.priceRange[0] !== current.priceRange[0]
+    ) {
+      current.setPriceRange([...values.priceRange]);
     }
-    if (values.rating !== selectedRating) {
-      setSelectedRating(values.rating);
+    if (values.rating !== current.selectedRating) {
+      current.setSelectedRating(values.rating);
     }
-  };
+  }, []); // Empty dependency array since we use refs
 
   // Watch form changes and update parent state
   React.useEffect(() => {
@@ -80,22 +106,23 @@ function FilterOptionsCard({
         handleChange(values as z.infer<typeof formSchema>);
       }
     });
-    handleChange;
     return () => subscription.unsubscribe();
-  }, [form.watch, form]);
+  }, [form.watch, handleChange]); // handleChange is now stable
 
   // Handle reset filters
   const handleReset = () => {
     const defaultPriceRange: [number, number] = [0, 500];
-    setSelectedCategory("");
-    setPriceRange([...defaultPriceRange]);
-    setSelectedRating(0);
+    const current = latestValues.current;
+    current.setSelectedCategory("");
+    current.setPriceRange([...defaultPriceRange]);
+    current.setSelectedRating(0);
     form.reset({
       category: "",
       priceRange: [...defaultPriceRange],
       rating: 0,
     });
   };
+
   return (
     <div className="bg-card p-6 rounded-lg shadow-sm sticky top-24">
       <h3 className="text-lg font-semibold mb-6">Filter Products</h3>

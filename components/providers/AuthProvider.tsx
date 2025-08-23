@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, createContext, useContext } from "react";
-import AuthModals from "../auth/AuthModals";
+import AuthModals from "@/components/auth/AuthModals";
 import { User } from "@/interfaces/auth";
 
 type ModalType = "login" | "signup" | null;

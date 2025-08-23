@@ -225,7 +225,7 @@ const Footer = () => {
         <div className="pt-8 border-t">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-6 mb-4 md:mb-0">
-              <span className="text-sm">© {currentYear} SafariGuides, Inc.</span>
+              <span className="text-sm">© {currentYear} Guides, Inc.</span>
               <div className="flex space-x-6">
                 <Link href="/privacy" className="text-sm">
                   Privacy
@@ -241,7 +241,7 @@ const Footer = () => {
             <div className="flex items-center space-x-6">
               <div className="flex items-center">
                 <GlobeIcon className="h-4 w-4 mr-2" />
-                <span className="text-sm">Safari Guides</span>
+                <span className="text-sm">Guides.</span>
               </div>
               <div className="text-sm">
                 <span className="font-medium">TZS</span> Tanzanian Shilling

@@ -16,7 +16,7 @@ const Header = () => {
     <header className="bg-white/50 dark:bg-black/50 dark:backdrop-blur-xl backdrop-blur-xl shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center space-x-2">
-          <span className="text-3xl font-black">guides.africa</span>
+          <span className="text-3xl font-black">guides</span>
         </Link>
 
         {/* Desktop Navigation */}

@@ -1,17 +1,17 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Guide } from "@/interfaces/guide";
 import RatingBadge from "../RatingBadge";
 import VerifiedBadge from "./VerifiedBadge";
+import { User } from "@/interfaces/auth";
 
-const GuideCard = ({ guide }: { guide: Guide }) => {
+const GuideCard = ({ guide }: { guide: User }) => {
   return (
     <Link href={`/safari-guides/${guide.id}`} className="block group">
       <div className="overflow-hidden">
         <div className="relative aspect-square">
           <Image
-            src={guide.image}
+            src={guide.image!}
             alt={`Guide ${guide.name}`}
             fill
             className="object-cover rounded-2xl"
@@ -22,7 +22,7 @@ const GuideCard = ({ guide }: { guide: Guide }) => {
           {guide.verified && <VerifiedBadge verified={guide.verified} />}
 
           {/* Rating overlay */}
-          <RatingBadge rating={guide.rating} />
+          <RatingBadge rating={guide.rating!} />
         </div>
 
         {/* Guide info below image */}
@@ -30,7 +30,7 @@ const GuideCard = ({ guide }: { guide: Guide }) => {
           <h3 className="font-semibold line-clamp-1">{guide.name}</h3>
           <div className="flex items-center gap-x-1 text-sm text-muted-foreground">
             Languages {" - "}
-            {guide.languages.map((language) => (
+            {guide.languages!.map((language) => (
               <span key={language} className="">
                 {language}
               </span>

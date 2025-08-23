@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { Guide } from "@/interfaces/guide";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Select,
@@ -12,9 +11,10 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { User } from "@/interfaces/auth";
 
 interface GuidesFilterSidebarProps {
-  guides: Guide[];
+  guides: User[];
   selectedLocation: string;
   selectedSpecialty: string;
   priceRange: [number, number];
@@ -98,7 +98,7 @@ const GuidesFilterSidebar: React.FC<GuidesFilterSidebarProps> = ({
               </SelectTrigger>
               <SelectContent>
                 {locations.map((location, index) => (
-                  <SelectItem key={index} value={location}>
+                  <SelectItem key={index} value={location!}>
                     {location}
                   </SelectItem>
                 ))}
@@ -116,7 +116,7 @@ const GuidesFilterSidebar: React.FC<GuidesFilterSidebarProps> = ({
               </SelectTrigger>
               <SelectContent>
                 {specialties.map((specialty, index) => (
-                  <SelectItem key={index} value={specialty}>
+                  <SelectItem key={index} value={specialty!}>
                     {specialty}
                   </SelectItem>
                 ))}

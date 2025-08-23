@@ -2,7 +2,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import GuideCard from "@/components/guides/GuideCard";
-import { Guide } from "@/interfaces/guide";
 import {
   Select,
   SelectContent,
@@ -12,9 +11,10 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { User } from "@/interfaces/auth";
 
 interface GuidesListSectionProps {
-  guides: Guide[];
+  guides: User[];
   colSize: number;
   onSortChange: (sortBy: string) => void;
   onClearFilters: () => void;

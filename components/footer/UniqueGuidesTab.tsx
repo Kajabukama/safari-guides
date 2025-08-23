@@ -19,7 +19,7 @@ function UniqueGuidesTab() {
               >
                 <div className="relative w-12 h-12 overflow-hidden rounded-full">
                   <Image
-                    src={guide.image}
+                    src={guide.image!}
                     alt={guide.name}
                     fill
                     className="object-cover"
@@ -29,7 +29,7 @@ function UniqueGuidesTab() {
                 <div className="flex flex-col gap-y-1">
                   <h4 className="font-medium">{guide.name}</h4>
                   <div className="text-sm text-muted-foreground">
-                    {guide.location} - {guide.specialties[0]}
+                    {guide.location} - {guide.specialties![0]}
                   </div>
                 </div>
               </Link>

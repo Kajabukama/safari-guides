@@ -520,3 +520,50 @@ export const cartItems: CartItem[] = [
     color: "Red & Blue",
   },
 ];
+
+export const orderDetails = {
+  orderNumber: "TG" + Math.floor(10000 + Math.random() * 90000),
+  date: new Date().toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }),
+  total: 230.0,
+  paymentMethod: "Credit Card",
+  shippingAddress: {
+    name: "John Smith",
+    address: "123 Main Street",
+    city: "New York",
+    state: "NY",
+    postalCode: "10001",
+    country: "United States",
+  },
+  estimatedDelivery: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }),
+  items: [
+    {
+      id: 1,
+      name: "Handcrafted Maasai Beaded Necklace",
+      price: 45,
+      image: "/images/image.jpeg",
+      quantity: 1,
+    },
+    {
+      id: 2,
+      name: "Carved Wooden Safari Animals Set",
+      price: 65,
+      image: "/images/image.jpeg",
+      quantity: 2,
+    },
+    {
+      id: 8,
+      name: "Traditional Maasai Shuka Cloth",
+      price: 55,
+      image: "/images/image.jpeg",
+      quantity: 1,
+    },
+  ],
+};

@@ -6,7 +6,6 @@ import ProductCard from "@/components/shop/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { fadeIn, staggerContainer } from "@/components/shop/animations";
 import EmptyPage from "@/components/shop/EmptyPage";
 import FeaturedSection from "@/components/shop/FeaturedSection";
 import FilterOptionsCard from "@/components/shop/FilterOptionsCard";
@@ -37,6 +36,31 @@ const Shop = () => {
     const matchesRating = selectedRating === 0 || product.rating >= selectedRating;
     return matchesSearch && matchesCategory && matchesPrice && matchesRating;
   });
+
+  const fadeIn = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+      },
+    },
+  };
+  const staggerContainer = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
 
   // Sort products
   const sortedProducts = [...filteredProducts].sort((a: Product, b: Product) => {

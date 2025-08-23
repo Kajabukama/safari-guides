@@ -23,19 +23,19 @@ const Guides = () => {
     const filtered = guides.filter((guide) => {
       const matchesSearch =
         guide.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        guide.specialties.some((s) => s.toLowerCase().includes(searchTerm.toLowerCase()));
+        guide.specialties!.some((s: string) => s.toLowerCase().includes(searchTerm.toLowerCase()));
       const matchesLocation = selectedLocation === "" || guide.location === selectedLocation;
       const matchesSpecialty =
         selectedSpecialty === "" ||
-        guide.specialties.some((s) => s.toLowerCase() === selectedSpecialty.toLowerCase());
+        guide.specialties!.some((s: string) => s.toLowerCase() === selectedSpecialty.toLowerCase());
       const matchesPrice =
-        parseInt(guide.price.replace("$", "")) >= priceRange[0] &&
-        parseInt(guide.price.replace("$", "")) <= priceRange[1];
+        parseInt(guide.price!.replace("$", "")) >= priceRange[0] &&
+        parseInt(guide.price!.replace("$", "")) <= priceRange[1];
       const matchesVerified = !verifiedOnly || guide.verified;
       const matchesExperience =
         selectedExperience === "" || guide.experience === selectedExperience;
       const matchesLanguage =
-        selectedLanguage === "" || guide.languages.some((l) => l === selectedLanguage);
+        selectedLanguage === "" || guide.languages!.some((l: string) => l === selectedLanguage);
       const matchesTourType = selectedTourType === "" || guide.tourType === selectedTourType;
       const matchesGroupSize = selectedGroupSize === "" || guide.groupSize === selectedGroupSize;
       const matchesAvailable = !availableOnly || guide.available;
@@ -58,11 +58,11 @@ const Guides = () => {
     filtered.sort((a, b) => {
       switch (sortBy) {
         case "rating":
-          return b.rating - a.rating;
+          return b.rating! - a.rating!;
         case "price-low":
-          return parseInt(a.price.replace("$", "")) - parseInt(b.price.replace("$", ""));
+          return parseInt(a.price!.replace("$", "")) - parseInt(b.price!.replace("$", ""));
         case "price-high":
-          return parseInt(b.price.replace("$", "")) - parseInt(a.price.replace("$", ""));
+          return parseInt(b.price!.replace("$", "")) - parseInt(a.price!.replace("$", ""));
         default:
           return 0;
       }

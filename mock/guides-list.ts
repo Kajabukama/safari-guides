@@ -1,6 +1,6 @@
-import { Guide } from "@/interfaces/guide";
+import { User } from "@/interfaces/auth";
 
-export const guides: Guide[] = [
+export const guides: User[] = [
   // Original guides (1-8)
   {
     id: "1",

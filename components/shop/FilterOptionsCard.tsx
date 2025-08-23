@@ -100,14 +100,15 @@ function FilterOptionsCard({
 
   // Watch form changes and update parent state
   React.useEffect(() => {
-    const subscription = form.watch((values, { name }) => {
+    const { watch } = form;
+    const subscription = watch((values, { name }) => {
       console.log(name);
       if (values.category !== undefined && values.priceRange && values.rating !== undefined) {
         handleChange(values as z.infer<typeof formSchema>);
       }
     });
     return () => subscription.unsubscribe();
-  }, [form.watch, handleChange]); // handleChange is now stable
+  }, [handleChange]); // Only handleChange is needed since form.watch is stable
 
   // Handle reset filters
   const handleReset = () => {

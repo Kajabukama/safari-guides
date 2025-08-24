@@ -76,25 +76,3 @@ export const signUp = async (email: string, password: string, username: string) 
     };
   }
 };
-
-// export const getUsers = async (organizationId: string) => {
-//   try {
-//     const members = await db.query.member.findMany({
-//       where: eq(member.organizationId, organizationId),
-//     });
-
-//     const users = await db.query.user.findMany({
-//       where: not(
-//         inArray(
-//           user.id,
-//           members.map((member) => member.userId)
-//         )
-//       ),
-//     });
-
-//     return users;
-//   } catch (error) {
-//     console.error(error);
-//     return [];
-//   }
-// };

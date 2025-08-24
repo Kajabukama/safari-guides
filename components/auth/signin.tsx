@@ -18,7 +18,7 @@ interface SigninFormProps {
   onClose: () => void;
 }
 
-function SigninForm({ onSwitchModal, onClose }: SigninFormProps) {
+function SigninForm({ onSwitchModal }: SigninFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<LoginFormData>({
@@ -36,6 +36,7 @@ function SigninForm({ onSwitchModal, onClose }: SigninFormProps) {
     try {
       toast.error("Login successful!");
     } catch (error) {
+      console.log(error);
       toast.error("Login failed. Please try again.");
     } finally {
       setIsLoading(false);
@@ -47,6 +48,7 @@ function SigninForm({ onSwitchModal, onClose }: SigninFormProps) {
     try {
       toast.error("Login successful!");
     } catch (error) {
+      console.log(error);
       toast.error(`${provider} login failed. Please try again.`);
       setIsLoading(false);
     }

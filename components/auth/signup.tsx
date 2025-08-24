@@ -24,7 +24,7 @@ interface SignupFormProps {
   onClose: () => void;
 }
 
-function SignupForm({ onSwitchModal, onClose }: SignupFormProps) {
+function SignupForm({ onSwitchModal }: SignupFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<SignupFormData>({
@@ -39,10 +39,12 @@ function SignupForm({ onSwitchModal, onClose }: SignupFormProps) {
   });
 
   const onSubmit = async (data: SignupFormData) => {
+    console.log(data);
     setIsLoading(true);
     try {
       toast.error("Registration successful!");
     } catch (error) {
+      console.log(error);
       toast.error("Registration failed. Please try again.");
     } finally {
       setIsLoading(false);
@@ -50,10 +52,12 @@ function SignupForm({ onSwitchModal, onClose }: SignupFormProps) {
   };
 
   const handleSocialSignup = async (provider: "google" | "facebook") => {
+    console.log(provider);
     setIsLoading(true);
     try {
       toast.error("Registration successful!");
     } catch (error) {
+      console.log(error);
       toast.error("Registration failed. Please try again.");
       setIsLoading(false);
     }

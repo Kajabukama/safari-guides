@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { ClockIcon, StarIcon } from "lucide-react";
+import { ClockIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";

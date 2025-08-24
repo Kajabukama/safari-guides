@@ -1,11 +1,10 @@
 "use client";
+
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRightIcon } from "lucide-react";
-import Link from "next/link";
 import ItineraryCard from "@/components/itineraries/ItineraryCard";
 import { ItineraryMany } from "@/interfaces/itinerary";
-import HeadingSection from "../HeadingSection";
+import HeadingSection from "@/components/HeadingSection";
 
 interface ItinerariesSectionProps {
   itineraries: ItineraryMany[];

@@ -10,19 +10,19 @@ export const PhotoGrid = ({
 }) => {
   // Calculate the number of columns based on viewport width
   const getGridCols = () => {
-    if (typeof window === "undefined") return "md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6";
+    if (typeof window === "undefined") return "md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-7";
 
     const width = window.innerWidth;
-    if (width < 640) return "grid-cols-1";
-    if (width < 1024) return "grid-cols-2";
-    if (width < 1280) return "grid-cols-3";
-    if (width < 1536) return "grid-cols-4";
-    return "grid-cols-6";
+    if (width < 640) return "grid-cols-2";
+    if (width < 1024) return "grid-cols-3";
+    if (width < 1280) return "grid-cols-4";
+    if (width < 1536) return "grid-cols-5";
+    return "grid-cols-7";
   };
 
   return (
     <motion.div
-      className={`grid gap-4 sm:gap-6 ${getGridCols()}`}
+      className={`grid gap-0.5 sm:gap-0.5 ${getGridCols()}`}
       initial="hidden"
       animate="show"
       variants={{

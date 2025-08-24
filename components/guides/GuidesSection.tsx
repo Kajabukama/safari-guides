@@ -1,9 +1,9 @@
 "use client";
+
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRightIcon } from "lucide-react";
-import Link from "next/link";
 import GuideList from "@/components/guides/GuideList";
+import HeadingSection from "../HeadingSection";
 
 const GuidesSection: React.FC = () => {
   const fadeIn = {
@@ -21,8 +21,8 @@ const GuidesSection: React.FC = () => {
   };
 
   return (
-    <motion.section
-      className="py-16"
+    <motion.div
+      className="container mx-auto"
       initial="hidden"
       whileInView="visible"
       viewport={{
@@ -30,23 +30,14 @@ const GuidesSection: React.FC = () => {
       }}
       variants={fadeIn}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-end mb-10">
-          <div>
-            <h2 className="text-3xl font-bold mb-2">Popular Safari Guides</h2>
-            <p className="text-muted-foreground">Meet our experienced and passionate guides</p>
-          </div>
-          <Link
-            href="/guides"
-            className="flex items-center text-emerald-600 font-medium hover:text-emerald-700 transition-colors"
-          >
-            View all guides
-            <ArrowRightIcon size={18} className="ml-1" />
-          </Link>
-        </div>
-        <GuideList />
-      </div>
-    </motion.section>
+      <HeadingSection
+        title="Popular Safari Guides"
+        description="Meet our experienced and passionate guides"
+        linkLabel="View all"
+        url="/guides"
+      />
+      <GuideList />
+    </motion.div>
   );
 };
 

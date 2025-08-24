@@ -110,7 +110,7 @@ const ItineraryDetail = () => {
               </div>
               {/* Tabs */}
               <Tabs defaultValue="itinerary" className="mb-8">
-                <TabsList className="w-full md:w-auto">
+                <TabsList className="w-full md:w-auto overflow-x-auto">
                   <TabsTrigger value="itinerary">Itinerary</TabsTrigger>
                   <TabsTrigger value="includes">What&apos;s Included</TabsTrigger>
                   <TabsTrigger value="accommodation">Accommodation</TabsTrigger>
@@ -118,7 +118,7 @@ const ItineraryDetail = () => {
                   <TabsTrigger value="faq">FAQ</TabsTrigger>
                 </TabsList>
                 {/* Itinerary Tab */}
-                <TabsContent value="itinerary" className="mt-6">
+                <TabsContent value="itinerary" className="my-6">
                   <div className="space-y-6">
                     {itinerary.itinerary.map((day) => (
                       <div

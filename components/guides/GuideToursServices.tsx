@@ -5,6 +5,7 @@ import { ClockIcon, StarIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
+import RatingBadge from "../RatingBadge";
 
 interface Tour {
   id: number;
@@ -52,8 +53,7 @@ const GuideToursServices: React.FC<GuideToursServicesProps> = ({ tours }) => {
   return (
     <motion.div initial="hidden" animate="visible" variants={fadeIn}>
       <div className="mb-10">
-        <h2 className="text-2xl font-semibold mb-6">Tours & Services</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-6 gap-6">
           {tours.map((tour, index) => (
             <motion.div
               key={tour.id}
@@ -64,28 +64,25 @@ const GuideToursServices: React.FC<GuideToursServicesProps> = ({ tours }) => {
               className="group"
             >
               <Link href={`/services/${tour.id}`} passHref>
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg group">
-                  <Image
-                    src={tour.image}
-                    alt={tour.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-between p-4">
-                    <div className="flex justify-end">
-                      <div className="flex items-center bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full">
-                        <StarIcon size={14} className="text-yellow-400 fill-yellow-400 mr-1" />
-                        <span className="text-xs font-medium text-gray-900">4.8</span>
-                      </div>
-                    </div>
+                <div className="relative w-full rounded-xl group space-y-1">
+                  <div className="aspect-square overflow-hidden rounded-xl relative">
+                    <Image
+                      src={tour.image}
+                      alt={tour.title}
+                      width={1600}
+                      height={1600}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <RatingBadge rating={4.8} />
+                  </div>
+                  <div className="flex flex-col justify-between">
                     <div className="space-y-2">
-                      <h3 className="text-white font-medium text-lg line-clamp-2">{tour.title}</h3>
-                      <div className="flex items-center text-white/90">
+                      <h3 className="font-medium text-sm line-clamp-1">{tour.title}</h3>
+                      <div className="flex items-center">
                         <ClockIcon size={14} className="mr-1.5" />
                         <span className="text-sm">{tour.duration}</span>
-                        <Badge className="ml-auto bg-white/90 text-gray-900 hover:bg-white font-semibold">
-                          {tour.price}
-                        </Badge>
+                        <Badge className="ml-auto font-semibold text-xs">{tour.price}</Badge>
                       </div>
                     </div>
                   </div>

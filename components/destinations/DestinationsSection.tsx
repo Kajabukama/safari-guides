@@ -1,8 +1,10 @@
 "use client";
+
 import React from "react";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import DestinationCard from "@/components/destinations/DestinationCard";
 import CarouselNavigation from "@/components/CarouselNavigation";
+import HeadingSection from "@/components/HeadingSection";
 
 interface Destination {
   id: number;
@@ -18,41 +20,40 @@ interface DestinationsSectionProps {
 
 const DestinationsSection = ({ destinations }: DestinationsSectionProps) => {
   return (
-    <section className="py-16">
-      <div className="container mx-auto">
-        <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Popular Destinations</h2>
-          <p className="text-muted-foreground">
-            Discover Africa&apos;s most breathtaking locations with our expert local guides
-          </p>
-        </div>
+    <div className="container mx-auto">
+      <HeadingSection
+        title="Popular Destinations"
+        description="Discover Africa's most breathtaking locations with our expert local guides"
+        linkLabel="View all"
+        url="/destinations"
+        showLink={false}
+      />
 
-        <div className="relative">
-          <Carousel
-            opts={{
-              align: "start",
-              slidesToScroll: 4,
-            }}
-            className="w-full relative"
-          >
-            <CarouselContent className="mb-10">
-              {destinations.map((destination) => (
-                <CarouselItem key={destination.id} className="md:basis-1/2 lg:basis-1/5">
-                  <DestinationCard
-                    name={destination.name}
-                    image={destination.image}
-                    description={destination.description}
-                    guideCount={destination.guideCount}
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselNavigation />
-          </Carousel>
-        </div>
+      <div className="relative">
+        <Carousel
+          opts={{
+            align: "start",
+            slidesToScroll: 4,
+          }}
+          className="w-full relative"
+        >
+          <CarouselContent className="">
+            {destinations.map((destination) => (
+              <CarouselItem key={destination.id} className="md:basis-2/2 lg:basis-1/6 basis-1/6">
+                <DestinationCard
+                  name={destination.name}
+                  image={destination.image}
+                  description={destination.description}
+                  guideCount={destination.guideCount}
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselNavigation />
+        </Carousel>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default React.memo(DestinationsSection);
+export default DestinationsSection;

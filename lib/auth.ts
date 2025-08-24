@@ -4,7 +4,6 @@ import { schema } from "@/database/schema";
 import OrganizationInvitationEmail from "@/components/emails/organization-invitation";
 import ForgotPasswordEmail from "@/components/emails/reset-password";
 import VerifyEmail from "@/components/emails/verify-email";
-import { getActiveOrganization } from "@/actions/organizations";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
@@ -45,19 +44,19 @@ export const auth = betterAuth({
     requireEmailVerification: true,
   },
   databaseHooks: {
-    session: {
-      create: {
-        before: async (session) => {
-          const organization = await getActiveOrganization(session.userId);
-          return {
-            data: {
-              ...session,
-              activeOrganizationId: organization?.id,
-            },
-          };
-        },
-      },
-    },
+    // session: {
+    //   create: {
+    //     before: async (session) => {
+    //       const organization = await getActiveOrganization(session.userId);
+    //       return {
+    //         data: {
+    //           ...session,
+    //           activeOrganizationId: organization?.id,
+    //         },
+    //       };
+    //     },
+    //   },
+    // },
   },
   database: drizzleAdapter(db, {
     provider: "pg",

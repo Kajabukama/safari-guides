@@ -18,11 +18,8 @@ export const loginSchema = z
 // Signup validation schema
 export const signupSchema = z
   .object({
-    firstName: z.string().min(2, "First name must be at least 2 characters long"),
-    lastName: z.string().min(2, "Last name must be at least 2 characters long"),
+    name: z.string().min(2, "Name must be at least 2 characters long"),
     email: z.string().email("Please enter a valid email address"),
-    phone: z.string().regex(phoneRegex, "Please enter a valid phone number"),
-    location: z.string().min(2, "Location is required"),
     password: z
       .string()
       .min(8, "Password must be at least 8 characters long")
@@ -32,7 +29,6 @@ export const signupSchema = z
       ),
     confirmPassword: z.string(),
     userType: z.enum(["traveler", "guide"]),
-    bio: z.string().optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",

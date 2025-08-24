@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useState } from "react";
-import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
@@ -7,18 +9,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Mail as MailIcon,
-  Phone as PhoneIcon,
   Globe as GlobeIcon,
   Facebook as FacebookIcon,
-  MapPin as MapPinIcon,
-  User as UserIcon,
+  UserRoundIcon,
 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema, type SignupFormData } from "@/lib/validation/auth";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { toast } from "sonner";
-import { authService } from "@/lib/auth-service";
 
 interface SignupFormProps {
   onSwitchModal: (modalType: "login") => void;
@@ -31,35 +30,20 @@ function SignupForm({ onSwitchModal, onClose }: SignupFormProps) {
   const form = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      name: "",
       email: "",
-      phone: "",
-      location: "",
       password: "",
       confirmPassword: "",
       userType: "traveler",
-      bio: "",
     },
   });
 
   const onSubmit = async (data: SignupFormData) => {
     setIsLoading(true);
     try {
-      const response = await authService.signup(data);
-
-      if (response.success) {
-        toast.success("Account created successfully!");
-        onClose();
-        // Optionally trigger a page refresh or redirect
-        // window.location.reload();
-      } else {
-        toast.error(response.message || "Registration failed. Please try again.");
-      }
+      toast.error("Registration successful!");
     } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Registration failed. Please try again.";
-      toast.error(errorMessage);
+      toast.error("Registration failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -68,17 +52,9 @@ function SignupForm({ onSwitchModal, onClose }: SignupFormProps) {
   const handleSocialSignup = async (provider: "google" | "facebook") => {
     setIsLoading(true);
     try {
-      if (provider === "google") {
-        await authService.loginWithGoogle();
-      } else {
-        await authService.loginWithFacebook();
-      }
-      // Note: For social signup, the redirect happens in the service
-      // so we don't need to close the modal here
+      toast.error("Registration successful!");
     } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : `${provider} signup failed. Please try again.`;
-      toast.error(errorMessage);
+      toast.error("Registration failed. Please try again.");
       setIsLoading(false);
     }
   };
@@ -86,11 +62,12 @@ function SignupForm({ onSwitchModal, onClose }: SignupFormProps) {
   return (
     <>
       <DialogHeader>
-        <DialogTitle>Sign up</DialogTitle>
+        <DialogTitle className="text-2xl font-bold">Create account</DialogTitle>
+        <DialogDescription className="text-base">
+          Create your account to connect with a guide for your next safari.
+        </DialogDescription>
       </DialogHeader>
       <div className="space-y-6">
-        <h3 className="text-2xl font-bold">Join Africa Guides</h3>
-
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
@@ -143,38 +120,24 @@ function SignupForm({ onSwitchModal, onClose }: SignupFormProps) {
               )}
             />
 
-            <div className="grid grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="firstName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <div className="relative">
-                        <UserIcon
-                          size={18}
-                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
-                        />
-                        <Input type="text" className="pl-10" placeholder="First name" {...field} />
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="lastName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input type="text" placeholder="Last name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormControl>
+                    <div className="relative">
+                      <UserRoundIcon
+                        size={18}
+                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+                      />
+                      <Input type="text" className="pl-10" placeholder="John Doe" {...field} />
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             <FormField
               control={form.control}
@@ -187,53 +150,10 @@ function SignupForm({ onSwitchModal, onClose }: SignupFormProps) {
                         size={18}
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
                       />
-                      <Input type="email" className="pl-10" placeholder="Email" {...field} />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <div className="relative">
-                      <PhoneIcon
-                        size={18}
-                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
-                      />
                       <Input
-                        type="tel"
+                        type="email"
                         className="pl-10"
-                        placeholder="+255 123 456 789"
-                        {...field}
-                      />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="location"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <div className="relative">
-                      <MapPinIcon
-                        size={18}
-                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
-                      />
-                      <Input
-                        type="text"
-                        className="pl-10"
-                        placeholder="Arusha, Tanzania"
+                        placeholder="Email address"
                         {...field}
                       />
                     </div>

@@ -8,6 +8,23 @@ export const user = pgTable("user", {
     .$defaultFn(() => false)
     .notNull(),
   image: text("image"),
+  // Additional user profile fields
+  phone: text("phone"),
+  location: text("location"),
+  bio: text("bio"),
+  userType: text("user_type").$type<"traveler" | "guide">(),
+  isGuide: boolean("is_guide").$defaultFn(() => false),
+  rating: text("rating"), // Using text to store decimal as string
+  experience: text("experience"),
+  languages: text("languages"), // JSON string array
+  tourType: text("tour_type"),
+  groupSize: text("group_size"),
+  available: boolean("available").$defaultFn(() => true),
+  specialties: text("specialties"), // JSON string array
+  price: text("price"),
+  verified: boolean("verified").$defaultFn(() => false),
+  reviewCount: text("review_count").$defaultFn(() => "0"), // Using text for number
+  joinedDate: timestamp("joined_date").$defaultFn(() => new Date()),
   createdAt: timestamp("created_at")
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),

@@ -1,11 +1,12 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
+import { BadgeCheck } from "lucide-react";
 
 function VerifiedBadge({ verified }: { verified: boolean }) {
   return (
-    <Badge className="absolute top-3 right-3 bg-white text-primary hover:bg-white">
-      {verified ? "Verified" : "Not Verified"}
-    </Badge>
+    <div className="size-6 p-0.5 flex items-center justify-center absolute top-2 right-2 bg-accent text-primary rounded-full">
+      {verified ? <BadgeCheck /> : "Not Verified"}
+    </div>
   );
 }
 

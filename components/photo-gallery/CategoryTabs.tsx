@@ -23,18 +23,10 @@ export const CategoryTabs = ({ selectedCategory, onCategoryChange }: CategoryTab
       transition={{ duration: 0.3, delay: 0.1 }}
       className="mb-8 overflow-x-auto pb-2 -mx-4 px-4"
     >
-      <Tabs
-        value={selectedCategory}
-        onValueChange={onCategoryChange}
-        className="w-full"
-      >
+      <Tabs value={selectedCategory} onValueChange={onCategoryChange} className="w-full">
         <TabsList className="w-full md:w-auto h-auto flex flex-wrap justify-start md:justify-start">
           {categories.map((category) => (
-            <TabsTrigger
-              key={category.value}
-              value={category.value}
-              className="whitespace-nowrap px-3 py-1.5 text-sm md:text-base"
-            >
+            <TabsTrigger key={category.value} value={category.value} className="">
               {category.label}
             </TabsTrigger>
           ))}

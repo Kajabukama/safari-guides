@@ -16,7 +16,7 @@ export const PhotoCard = ({ photo, onClick, index = 0 }: PhotoCardProps) => {
 
   return (
     <motion.div
-      className="relative group cursor-pointer overflow-hidden rounded-2xl aspect-square"
+      className="relative group cursor-pointer overflow-hidden rounded-none aspect-square"
       initial={{ opacity: 0, y: 20 }}
       animate={{
         opacity: 1,
@@ -28,7 +28,7 @@ export const PhotoCard = ({ photo, onClick, index = 0 }: PhotoCardProps) => {
         },
       }}
       whileHover={{
-        scale: 1.03,
+        scale: 1,
         transition: { duration: 0.2 },
       }}
       onClick={() => onClick(photo.id)}

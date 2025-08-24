@@ -17,7 +17,7 @@ function SliderThumbnail({
   return (
     <div
       key={index}
-      className={`size-16 rounded-full overflow-hidden border-4 ${
+      className={`size-10 lg:size-16 rounded-full overflow-hidden border-4 ${
         activeImageIndex === index ? "border-white" : "border-transparent opacity-70"
       }`}
       onClick={() => setActiveImageIndex(index)}

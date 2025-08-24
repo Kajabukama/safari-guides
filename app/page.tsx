@@ -10,13 +10,15 @@ import { events } from "@/mock/events";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="mb-20">
       <HeroSection />
-      <GuidesSection />
-      <ItinerariesSection itineraries={featuredItineraries} />
-      <EventsSection events={events} />
-      <DestinationsSection destinations={destinations} />
-      <ServicesSection services={featuredServices} />
+      <div className="px-5 space-y-10">
+        <GuidesSection />
+        <ItinerariesSection itineraries={featuredItineraries} />
+        <EventsSection events={events} />
+        <DestinationsSection destinations={destinations} />
+        <ServicesSection services={featuredServices} />
+      </div>
     </div>
   );
 }

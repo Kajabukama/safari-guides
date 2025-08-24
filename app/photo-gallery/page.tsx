@@ -147,9 +147,7 @@ export default function PhotoGallery() {
         {/* Load More Button */}
         {filteredPhotos.length > 0 && (
           <div className="text-center mt-12">
-            <Button variant="outline" size="lg" className="px-8">
-              Load More Photos
-            </Button>
+            <Button variant="outline">Load More Photos</Button>
           </div>
         )}
       </div>
@@ -178,11 +176,7 @@ export default function PhotoGallery() {
               Have amazing photos from your Safari adventure? Join our community and share them with
               fellow travelers
             </p>
-            <Button
-              size="lg"
-              className="px-8 bg-stone-900 hover:bg-stone-800"
-              onClick={openLoginModal}
-            >
+            <Button className="" onClick={openLoginModal}>
               <CameraIcon size={18} className="mr-2" />
               Upload Your Photos
             </Button>

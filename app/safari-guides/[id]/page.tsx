@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { guide } from "@/mock/guide-profile";
@@ -49,7 +50,8 @@ export default function GuideProfile() {
           <Tabs defaultValue="about" onValueChange={handleTabChange} className="w-full">
             <TabsList className="w-full flex gap-2 overflow-x-auto">
               <TabsTrigger value="about">About</TabsTrigger>
-              <TabsTrigger value="tours">Tours & Services</TabsTrigger>
+              <TabsTrigger value="itineries">Itineraries</TabsTrigger>
+              <TabsTrigger value="tours">Services</TabsTrigger>
               <TabsTrigger value="reviews">Reviews</TabsTrigger>
               <TabsTrigger value="gallery">Photo Gallery</TabsTrigger>
             </TabsList>
@@ -58,6 +60,10 @@ export default function GuideProfile() {
             <div className="mb-16 mt-8">
               <TabsContent value="about">
                 <GuideAbout guide={guide} />
+              </TabsContent>
+
+              <TabsContent value="itineries">
+                <GuideToursServices tours={guide.tours} />
               </TabsContent>
 
               <TabsContent value="tours">

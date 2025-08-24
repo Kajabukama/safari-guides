@@ -17,17 +17,13 @@ const GuideCard = ({ guide }: { guide: User }) => {
             className="object-cover rounded-2xl"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-
-          {/* Verified badge */}
           {guide.verified && <VerifiedBadge verified={guide.verified} />}
-
-          {/* Rating overlay */}
           <RatingBadge rating={guide.rating!} />
         </div>
 
         {/* Guide info below image */}
         <div className="mt-3 px-1">
-          <h3 className="font-semibold line-clamp-1">{guide.name}</h3>
+          <h3 className="font-semibold">{guide.name}</h3>
           <div className="flex items-center gap-x-1 text-sm text-muted-foreground">
             Languages {" - "}
             {guide.languages!.map((language) => (

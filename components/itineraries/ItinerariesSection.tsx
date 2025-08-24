@@ -5,6 +5,7 @@ import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 import ItineraryCard from "@/components/itineraries/ItineraryCard";
 import { ItineraryMany } from "@/interfaces/itinerary";
+import HeadingSection from "../HeadingSection";
 
 interface ItinerariesSectionProps {
   itineraries: ItineraryMany[];
@@ -39,7 +40,7 @@ const ItinerariesSection = ({ itineraries }: ItinerariesSectionProps) => {
 
   return (
     <motion.section
-      className="py-16"
+      className=""
       initial="hidden"
       whileInView="visible"
       viewport={{
@@ -47,24 +48,16 @@ const ItinerariesSection = ({ itineraries }: ItinerariesSectionProps) => {
       }}
       variants={fadeIn}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-end mb-10">
-          <div>
-            <h2 className="text-3xl font-bold mb-2">Popular Safari Itineraries</h2>
-            <p className="text-muted-foreground">
-              Expertly crafted safari experiences for unforgettable adventures
-            </p>
-          </div>
-          <Link
-            href="/safaris"
-            className="flex items-center text-emerald-600 font-medium hover:text-emerald-700 transition-colors"
-          >
-            Explore all safaris
-            <ArrowRightIcon size={18} className="ml-1" />
-          </Link>
-        </div>
+      <div className="container mx-auto">
+        <HeadingSection
+          title="Popular Safari Itineraries"
+          description=" Expertly crafted safari experiences for unforgettable adventures"
+          linkLabel="View all"
+          url="/safari-itineraries"
+        />
+
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-7 gap-6"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"

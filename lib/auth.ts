@@ -49,54 +49,10 @@ export const auth = betterAuth({
     },
     requireEmailVerification: true,
   },
-  databaseHooks: {
-    // session: {
-    //   create: {
-    //     before: async (session) => {
-    //       const organization = await getActiveOrganization(session.userId);
-    //       return {
-    //         data: {
-    //           ...session,
-    //           activeOrganizationId: organization?.id,
-    //         },
-    //       };
-    //     },
-    //   },
-    // },
-  },
+  databaseHooks: {},
   database: drizzleAdapter(db, {
     provider: "pg",
     schema,
   }),
-  plugins: [
-    // Temporarily disabled organization plugin to fix build issue
-    // organization({
-    //   async sendInvitationEmail(data) {
-    //     if (!resend) {
-    //       console.warn("Resend API key not available, skipping invitation email");
-    //       return;
-    //     }
-    //     const inviteLink = `${process.env.NEXT_PUBLIC_APP_URL}/api/accept-invitation/${data.id}`;
-
-    //     await resend.emails.send({
-    //       from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
-    //       to: data.email,
-    //       subject: "You've been invited to join our organization",
-    //       react: OrganizationInvitationEmail({
-    //         email: data.email,
-    //         invitedByUsername: data.inviter.user.name,
-    //         invitedByEmail: data.inviter.user.email,
-    //         teamName: data.organization.name,
-    //         inviteLink,
-    //       }),
-    //     });
-    //   },
-    //   roles: {
-    //     owner,
-    //     admin,
-    //     member,
-    //   },
-    // }),
-    nextCookies(),
-  ],
+  plugins: [nextCookies()],
 });

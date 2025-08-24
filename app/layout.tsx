@@ -6,6 +6,7 @@ import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import { BrandFont } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "Africa Guides",
@@ -34,6 +35,7 @@ export default function RootLayout({
               <Footer />
             </AuthProvider>
           </ThemeProvider>
+          <Analytics />
         </body>
       </html>
     </>

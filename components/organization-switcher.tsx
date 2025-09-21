@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Organization } from "@/database/schema/organization";
+import { Organization } from "@/database/schema";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 

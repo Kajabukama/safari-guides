@@ -25,6 +25,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Analytics />
             <Toaster
               position="top-center"
               className="rounded-full"
@@ -34,7 +35,6 @@ export default function RootLayout({
               closeButton={false}
             />
           </ThemeProvider>
-          <Analytics />
         </body>
       </html>
     </>

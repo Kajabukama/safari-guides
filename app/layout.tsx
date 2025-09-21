@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/components/ui/sonner";
 export const metadata: Metadata = {
   title: "Guides.Africa",
-  description: "AuthenticAfrican safari guides",
+  description: "Authentic African safari guides",
 };
 
 export default function RootLayout({

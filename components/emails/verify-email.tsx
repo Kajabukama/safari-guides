@@ -9,6 +9,7 @@ import {
   Button,
   Hr,
   Tailwind,
+  Img,
 } from "@react-email/components";
 
 interface VerifyEmailProps {
@@ -22,8 +23,8 @@ const VerifyEmail = (props: VerifyEmailProps) => {
     <Html lang="en" dir="ltr">
       <Tailwind>
         <Head />
-        <Body className="bg-gray-100 font-sans py-[40px]">
-          <Container className="bg-white rounded-[8px] p-[32px] max-w-[600px] mx-auto">
+        <Body className="bg-gray-50 font-sans py-[40px]">
+          <Container className="bg-white rounded-4xl shadow-md p-[32px] max-w-[600px] mx-auto">
             <Section>
               <Text className="text-[24px] font-bold text-gray-900 mb-[16px] mt-0">
                 Verify your email address
@@ -37,7 +38,7 @@ const VerifyEmail = (props: VerifyEmailProps) => {
               <Section className="text-center mb-[32px]">
                 <Button
                   href={verifyUrl}
-                  className="bg-blue-600 text-white px-[32px] py-[12px] rounded-[6px] text-[16px] font-medium no-underline box-border"
+                  className="bg-emerald-600 text-white px-[32px] py-[12px] rounded-full text-[16px] font-medium no-underline box-border w-full"
                 >
                   Verify Email Address
                 </Button>
@@ -59,24 +60,24 @@ const VerifyEmail = (props: VerifyEmailProps) => {
               <Text className="text-[12px] text-gray-500 m-0 leading-[16px]">
                 Best regards,
                 <br />
-                The Team
+                The Guides.Africa Team
               </Text>
             </Section>
-
-            <Section className="mt-[32px] pt-[24px] border-t border-gray-200">
-              <Text className="text-[12px] text-gray-400 m-0 text-center leading-[16px]">
-                Company Name
-                <br />
-                123 Business Street, Suite 100
-                <br />
-                City, State 12345
+          </Container>
+          <Container className="p-[16px] mt-[14px] max-w-[600px] mx-auto border-t border-gray-200">
+            <Section className="text-[13px] text-gray-400">
+              <Text>
+                Guides.Africa, <br />
+                Ngorongoro Building, 3rd Floor, <br />
+                Room 303, Arusha, Tanzania <br />
+                +255 714 454 282
               </Text>
 
-              <Text className="text-[12px] text-gray-400 m-0 text-center mt-[8px] leading-[16px]">
-                <a href="#" className="text-gray-400 underline">
+              <Text>
+                <a href="#" className="underline">
                   Unsubscribe
                 </a>{" "}
-                | © 2024 Company Name. All rights reserved.
+                | © 2025 Guides.Africa. All rights reserved.
               </Text>
             </Section>
           </Container>

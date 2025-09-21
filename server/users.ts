@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/database/drizzle";
-import { user } from "@/database/schema";
+import { member, user } from "@/database/schema";
 import { auth } from "@/lib/auth";
 import { eq, inArray, not } from "drizzle-orm";
 import { headers } from "next/headers";
@@ -13,7 +13,7 @@ export const getCurrentUser = async () => {
   });
 
   if (!session) {
-    redirect("/login");
+    redirect("/");
   }
 
   const currentUser = await db.query.user.findFirst({
@@ -21,7 +21,7 @@ export const getCurrentUser = async () => {
   });
 
   if (!currentUser) {
-    redirect("/login");
+    redirect("/");
   }
 
   return {
@@ -53,26 +53,48 @@ export const signIn = async (email: string, password: string) => {
   }
 };
 
-export const signUp = async (email: string, password: string, username: string) => {
+export const signUp = async (email: string, password: string, name: string, userType: string) => {
   try {
     await auth.api.signUpEmail({
       body: {
         email,
         password,
-        name: username,
+        name,
+        userType,
       },
     });
 
     return {
       success: true,
-      message: "Signed up successfully.",
+      message: "Please check your email for verification.",
     };
   } catch (error) {
     const e = error as Error;
-
     return {
       success: false,
       message: e.message || "An unknown error occurred.",
     };
+  }
+};
+
+export const getUsers = async (organizationId: string) => {
+  try {
+    const members = await db.query.member.findMany({
+      where: eq(member.organizationId, organizationId),
+    });
+
+    const users = await db.query.user.findMany({
+      where: not(
+        inArray(
+          user.id,
+          members.map((member) => member.userId)
+        )
+      ),
+    });
+
+    return users;
+  } catch (error) {
+    console.error(error);
+    return [];
   }
 };

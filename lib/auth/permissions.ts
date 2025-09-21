@@ -1,32 +1,31 @@
-// Temporarily disabled - depends on organization plugin
-// import { createAccessControl } from "better-auth/plugins/access";
-// import { defaultStatements } from "better-auth/plugins/organization/access";
+import { createAccessControl } from "better-auth/plugins/access";
+import { defaultStatements } from "better-auth/plugins/organization/access";
 
-// const statement = {
-//   ...defaultStatements,
-//   project: ["create", "share", "update", "delete"],
-// } as const;
+const statement = {
+  ...defaultStatements,
+  project: ["create", "share", "update", "delete"],
+} as const;
 
-// const ac = createAccessControl(statement);
+const ac = createAccessControl(statement);
+const member = ac.newRole({
+  project: ["create"],
+});
 
-// const member = ac.newRole({
-//   project: ["create"],
-// });
+const admin = ac.newRole({
+  project: ["create", "update"],
+});
 
-// const admin = ac.newRole({
-//   project: ["create", "update"],
-// });
+const owner = ac.newRole({
+  project: ["create", "update", "delete"],
+  organization: ["update", "delete"],
+});
 
-// const owner = ac.newRole({
-//   project: ["create", "update", "delete"],
-//   organization: ["update", "delete"],
-// });
+const guide = ac.newRole({
+  project: ["create", "update", "delete"],
+});
 
-// export { ac, admin, member, owner, statement };
+const traveler = ac.newRole({
+  project: ["create", "update", "delete"],
+});
 
-// Placeholder exports
-export const ac = {};
-export const admin = {};
-export const member = {};
-export const owner = {};
-export const statement = {};
+export { ac, admin, member, owner, guide, traveler, statement };

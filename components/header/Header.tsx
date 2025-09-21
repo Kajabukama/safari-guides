@@ -2,15 +2,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Globe, Menu, ShoppingBagIcon } from "lucide-react";
-import { useAuth } from "@/components/providers/AuthProvider";
 import { Button } from "@/components/ui/button";
 import NavLinkItem from "@/components/header/navlink";
-import UserAuthActions from "@/components/header/UserAuthActions";
-import MobileMenu from "@/components/header/MobileMenu";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isAuthenticated, user, openLoginModal, openSignupModal, logout } = useAuth();
 
   return (
     <header className="bg-white/50 dark:bg-black/50 dark:backdrop-blur-xl backdrop-blur-xl shadow-sm sticky top-0 z-50">
@@ -30,46 +26,31 @@ const Header = () => {
 
         {/* Desktop Auth Buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          {isAuthenticated ? (
-            <UserAuthActions user={user} logout={logout} />
-          ) : (
-            <>
-              <Button size="lg" variant="outline" onClick={openLoginModal}>
-                Log in
+          <>
+            <Button size="lg" variant="outline" asChild>
+              <Link href="/auth/signin">Log in</Link>
+            </Button>
+            <Button size="lg" asChild>
+              <Link href="/auth/signup">Become a Guide</Link>
+            </Button>
+            <Button variant="ghost" size="icon" className="">
+              <Globe className="size-6" />
+              <span className="sr-only">Language</span>
+            </Button>
+            <Button variant="ghost" size="icon" className="">
+              <Menu className="size-6" />
+              <span className="sr-only">Menu</span>
+            </Button>
+            <Link href="/gift-shop/cart" className="relative">
+              <Button variant="outline" size="icon">
+                <ShoppingBagIcon size={20} />
+                <span className="absolute -top-1 -right-1 bg-emerald-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  3
+                </span>
               </Button>
-              <Button size="lg" onClick={openSignupModal}>
-                Become a Guide
-              </Button>
-              <Button variant="ghost" size="icon" className="">
-                <Globe className="size-6" />
-                <span className="sr-only">Language</span>
-              </Button>
-              <Button variant="ghost" size="icon" className="">
-                <Menu className="size-6" />
-                <span className="sr-only">Menu</span>
-              </Button>
-              <Link href="/gift-shop/cart" className="relative">
-                <Button variant="outline" size="icon">
-                  <ShoppingBagIcon size={20} />
-                  <span className="absolute -top-1 -right-1 bg-emerald-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                    3
-                  </span>
-                </Button>
-              </Link>
-            </>
-          )}
+            </Link>
+          </>
         </div>
-
-        {/* Mobile menu button */}
-        <MobileMenu
-          isMenuOpen={isMenuOpen}
-          setIsMenuOpen={setIsMenuOpen}
-          isAuthenticated={isAuthenticated}
-          user={user}
-          openLoginModal={openLoginModal}
-          openSignupModal={openSignupModal}
-          logout={logout}
-        />
       </div>
     </header>
   );

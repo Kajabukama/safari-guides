@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { AuthProvider } from "@/components/providers/AuthProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import Header from "@/components/header/Header";
-import Footer from "@/components/footer/Footer";
-import { BrandFont } from "@/lib/fonts";
-import { cn } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/next";
-
+import { Toaster } from "@/components/ui/sonner";
 export const metadata: Metadata = {
-  title: "Africa Guides",
-  description: "Africa Guides",
+  title: "Guides.Africa",
+  description: "AuthenticAfrican safari guides",
 };
 
 export default function RootLayout({
@@ -29,11 +24,15 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <AuthProvider>
-              <Header />
-              <div className={cn("min-h-screen", BrandFont.className)}>{children}</div>
-              <Footer />
-            </AuthProvider>
+            {children}
+            <Toaster
+              position="top-center"
+              className="rounded-full"
+              expand={true}
+              duration={5000}
+              richColors
+              closeButton={false}
+            />
           </ThemeProvider>
           <Analytics />
         </body>

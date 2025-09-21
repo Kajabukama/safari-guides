@@ -1,25 +1,24 @@
 import { db } from "@/database/drizzle";
-import { schema } from "@/database/schema";
 
+import OrganizationInvitationEmail from "@/components/emails/organization-invitation";
 import ForgotPasswordEmail from "@/components/emails/reset-password";
 import VerifyEmail from "@/components/emails/verify-email";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
+import { lastLoginMethod, organization } from "better-auth/plugins";
 import { Resend } from "resend";
+import { admin, member, owner, guide, traveler } from "@/lib/auth/permissions";
+import { getActiveOrganization } from "@/server/organizations";
+import { schema } from "@/database/schema";
 
-// Only initialize Resend if API key is available
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+const resend = new Resend(process.env.RESEND_API_KEY as string);
 
 export const auth = betterAuth({
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
-      if (!resend) {
-        console.warn("Resend API key not available, skipping email verification");
-        return;
-      }
-      await resend.emails.send({
-        from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
+      resend.emails.send({
+        from: `${process.env.EMAIL_SENDER_NAME as string} <${process.env.EMAIL_SENDER_ADDRESS as string}>`,
         to: user.email,
         subject: "Verify your email",
         react: VerifyEmail({ username: user.name, verifyUrl: url }),
@@ -36,12 +35,8 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     sendResetPassword: async ({ user, url }) => {
-      if (!resend) {
-        console.warn("Resend API key not available, skipping password reset email");
-        return;
-      }
-      await resend.emails.send({
-        from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
+      resend.emails.send({
+        from: `${process.env.EMAIL_SENDER_NAME as string} <${process.env.EMAIL_SENDER_ADDRESS as string}>`,
         to: user.email,
         subject: "Reset your password",
         react: ForgotPasswordEmail({ username: user.name, resetUrl: url, userEmail: user.email }),
@@ -49,10 +44,67 @@ export const auth = betterAuth({
     },
     requireEmailVerification: true,
   },
-  databaseHooks: {},
+  databaseHooks: {
+    session: {
+      create: {
+        before: async (session) => {
+          const organization = await getActiveOrganization(session.userId);
+          return {
+            data: {
+              ...session,
+              activeOrganizationId: organization?.id,
+            },
+          };
+        },
+      },
+    },
+  },
   database: drizzleAdapter(db, {
     provider: "pg",
     schema,
   }),
-  plugins: [nextCookies()],
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        input: false,
+      },
+      userType: {
+        type: "string",
+        input: true,
+      },
+      isOnboarded: {
+        type: "boolean",
+        input: false,
+      },
+    },
+  },
+  plugins: [
+    organization({
+      async sendInvitationEmail(data) {
+        const inviteLink = `${process.env.NEXT_PUBLIC_APP_URL}/api/accept-invitation/${data.id}`;
+        resend.emails.send({
+          from: `${process.env.EMAIL_SENDER_NAME as string} <${process.env.EMAIL_SENDER_ADDRESS as string}>`,
+          to: data.email,
+          subject: "You've been invited to join our organization",
+          react: OrganizationInvitationEmail({
+            email: data.email,
+            invitedByUsername: data.inviter.user.name,
+            invitedByEmail: data.inviter.user.email,
+            teamName: data.organization.name,
+            inviteLink,
+          }),
+        });
+      },
+      roles: {
+        owner,
+        admin,
+        member,
+        guide,
+        traveler,
+      },
+    }),
+    lastLoginMethod(),
+    nextCookies(),
+  ],
 });

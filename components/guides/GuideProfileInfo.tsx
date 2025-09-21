@@ -7,6 +7,7 @@ import Image from "next/image";
 import ProfileActionButtons from "@/components/guides/ProfileActionButtons";
 import ProfilePriceSection from "@/components/guides/ProfilePriceSection";
 import GuideProfileReviews from "@/components/guides/GuideProfileReviews";
+import { CheckCircleIcon } from "../icons";
 
 interface GuideProfileInfoProps {
   guide: {
@@ -45,7 +46,7 @@ const GuideProfileInfo: React.FC<GuideProfileInfoProps> = ({ guide }) => {
               />
               {guide.verified && (
                 <div className="absolute top-0 right-3 bg-primary text-primary-foreground p-1 border-4 border-white dark:border-black rounded-full">
-                  <CheckIcon size={20} />
+                  <CheckCircleIcon className="w-6 h-6" />
                 </div>
               )}
             </div>

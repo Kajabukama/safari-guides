@@ -17,15 +17,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { useAuth } from "@/components/providers/AuthProvider";
 import { itinerary } from "@/mock/itinerary";
 import Image from "next/image";
 import LocationMap from "@/components/maps/LocationMap";
 import SimilarItineraries from "@/components/itineraries/SimilarItineraries";
 import ItineraryImageSlider from "@/components/itineraries/ItineraryImageSlider";
+import Link from "next/link";
 
 const ItineraryDetail = () => {
-  const { openLoginModal } = useAuth();
   const [isLiked, setIsLiked] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   // Animation variants
@@ -333,8 +332,8 @@ const ItineraryDetail = () => {
                   </div>
                 </div>
                 <div className="space-y-3">
-                  <Button className="w-full text-lg py-6" onClick={openLoginModal}>
-                    Book Now
+                  <Button className="w-full text-lg py-6" asChild>
+                    <Link href="/auth/signin">Book Now</Link>
                   </Button>
                   <Button variant="outline" className="w-full">
                     Contact Guide

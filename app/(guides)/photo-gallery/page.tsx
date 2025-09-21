@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-import { useAuth } from "@/components/providers/AuthProvider";
 import { photos } from "@/mock/photos";
 import type { Photo } from "@/interfaces";
 import { CategoryTabs, TagsFilter, PhotoGrid } from "@/components/photo-gallery";
@@ -11,7 +10,6 @@ import { CameraIcon, Loader } from "lucide-react";
 import GalleryHero from "@/components/photo-gallery/GalleryHero";
 
 export default function PhotoGallery() {
-  const { openLoginModal } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [isLoading, setIsLoading] = useState(true);
@@ -176,7 +174,7 @@ export default function PhotoGallery() {
               Have amazing photos from your Safari adventure? Join our community and share them with
               fellow travelers
             </p>
-            <Button className="" onClick={openLoginModal}>
+            <Button className="">
               <CameraIcon size={18} className="mr-2" />
               Upload Your Photos
             </Button>

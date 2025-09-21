@@ -5,10 +5,8 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Event } from "@/interfaces/event";
-import { useAuth } from "@/components/providers/AuthProvider";
 
 function EventBookingForm({ event }: { event: Event }) {
-  const { openLoginModal } = useAuth();
   const fadeIn = {
     hidden: {
       opacity: 0,
@@ -59,9 +57,7 @@ function EventBookingForm({ event }: { event: Event }) {
               </div>
             </div>
             <div className="space-y-3">
-              <Button className="w-full py-6" onClick={openLoginModal}>
-                Reserve a Spot
-              </Button>
+              <Button className="w-full py-6">Reserve a Spot</Button>
               <Button variant="outline" className="w-full">
                 <MessageSquareIcon size={16} className="mr-2" />
                 Message Host

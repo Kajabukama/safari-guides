@@ -5,7 +5,6 @@ import { service } from "@/mock/service";
 import { motion } from "framer-motion";
 import { MessageSquareIcon, CalendarIcon, ChevronDownIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { useAuth } from "@/components/providers/AuthProvider";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { format, addDays } from "date-fns";
@@ -25,7 +24,6 @@ import {
 import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
 
 function ServiceBookingForm() {
-  const { openLoginModal } = useAuth();
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<DateRange>({
     from: new Date(),
@@ -51,7 +49,6 @@ function ServiceBookingForm() {
 
   const onSubmit = (data: unknown) => {
     console.log(data);
-    openLoginModal();
   };
 
   return (

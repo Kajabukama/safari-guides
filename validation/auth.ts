@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+// const phoneRegex = /^\+?[1-9]\d{1,14}$/;
 
 export const userType = [
   {

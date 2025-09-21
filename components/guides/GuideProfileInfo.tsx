@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { CheckIcon, GlobeIcon, InstagramIcon, FacebookIcon, TwitterIcon } from "lucide-react";
+import { GlobeIcon, InstagramIcon, FacebookIcon, TwitterIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import ProfileActionButtons from "@/components/guides/ProfileActionButtons";

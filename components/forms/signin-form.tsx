@@ -17,7 +17,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { ContinueWithDivider } from "@/components/continue-with-divider";
 import { SocialButtons } from "@/components/forms/social-buttons";
-import { LoginFormInput, loginSchema } from "@/lib/validation/auth";
+import { LoginFormInput, loginSchema } from "@/validation/auth";
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
   const lastMethod = authClient.getLastUsedLoginMethod();

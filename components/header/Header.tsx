@@ -1,13 +1,10 @@
 "use client";
-import React, { useState } from "react";
 import Link from "next/link";
 import { Globe, Menu, ShoppingBagIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import NavLinkItem from "@/components/header/navlink";
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
     <header className="bg-white/50 dark:bg-black/50 dark:backdrop-blur-xl backdrop-blur-xl shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">

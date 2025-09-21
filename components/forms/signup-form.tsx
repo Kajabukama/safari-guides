@@ -15,7 +15,7 @@ import { useState } from "react";
 import { AtSignIcon, Loader2, LockKeyholeIcon, UserRoundIcon } from "lucide-react";
 import Link from "next/link";
 import { ContinueWithDivider } from "@/components/continue-with-divider";
-import { SignupFormInput, signupSchema, userType } from "@/lib/validation";
+import { SignupFormInput, signupSchema, userType } from "@/validation";
 import { RadioSelect } from "@/components/radio-select";
 import { SocialButtons } from "@/components/forms/social-buttons";
 

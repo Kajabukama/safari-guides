@@ -62,6 +62,9 @@ CREATE TABLE "user" (
 	"email" text NOT NULL,
 	"email_verified" boolean NOT NULL,
 	"image" text,
+	"role" text DEFAULT 'owner' NOT NULL,
+	"user_type" text DEFAULT 'guide' NOT NULL,
+	"is_onboarded" boolean DEFAULT false NOT NULL,
 	"created_at" timestamp NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	CONSTRAINT "user_email_unique" UNIQUE("email")

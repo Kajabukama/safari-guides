@@ -3,14 +3,13 @@ import Link from "next/link";
 import { Globe, Menu, ShoppingBagIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import NavLinkItem from "@/components/header/navlink";
+import { BrandLogo } from "../brand-logo";
 
 const Header = () => {
   return (
     <header className="bg-white/50 dark:bg-black/50 dark:backdrop-blur-xl backdrop-blur-xl shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="text-3xl font-black">guides</span>
-        </Link>
+        <BrandLogo showLabel width={35} height={35} size="medium" />
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8">

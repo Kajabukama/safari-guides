@@ -10,15 +10,12 @@ const Toaster = ({ ...props }: ToasterProps) => {
     <Sonner
       theme={theme as ToasterProps["theme"]}
       className="toaster group"
+      position="top-center"
       toastOptions={{
         style: {
-          fontSize: "16px",
+          fontSize: "14px",
           borderRadius: "3rem",
-          padding: "0.75rem 1.5rem",
-          whiteSpace: "nowrap",
-          width: "auto",
-          minWidth: "fit-content",
-          maxWidth: "60vw",
+          padding: "0.7rem 2rem",
         },
         className: "toast-custom",
       }}

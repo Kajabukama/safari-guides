@@ -3,14 +3,14 @@ import { db } from "@/database/drizzle";
 import OrganizationInvitationEmail from "@/components/emails/organization-invitation";
 import ForgotPasswordEmail from "@/components/emails/reset-password";
 import VerifyEmail from "@/components/emails/verify-email";
+import { schema } from "@/database/schema";
+import { admin, guide, member, owner, traveler } from "@/lib/auth/permissions";
+import { getActiveOrganization } from "@/server/organizations";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { lastLoginMethod, organization } from "better-auth/plugins";
 import { Resend } from "resend";
-import { admin, member, owner, guide, traveler } from "@/lib/auth/permissions";
-import { getActiveOrganization } from "@/server/organizations";
-import { schema } from "@/database/schema";
 
 const resend = new Resend(process.env.RESEND_API_KEY as string);
 

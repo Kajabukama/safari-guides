@@ -3,18 +3,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
-import { z } from "zod";
-import { toast } from "sonner";
-import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
 import { AtSignIcon, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { authClient } from "@/lib/auth-client";
+import { useState } from "react";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -33,7 +33,7 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
 
-    const { error } = await authClient.forgetPassword({
+    const { error } = await authClient.requestPasswordReset({
       email: values.email,
       redirectTo: "/auth/reset-password",
     });

@@ -1,6 +1,6 @@
-import Link from "next/link";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import Link from "next/link";
 
 interface BrandLogoProps {
   width?: number;
@@ -27,7 +27,7 @@ export const BrandLogo = ({
       <div className="flex items-center justify-center rounded-md">
         <Image width={width} height={height} src={"/logo.svg"} alt="Guides.africa" priority />
       </div>
-      {showLabel && "guides"}
+      {showLabel && "Guides"}
     </Link>
   );
 };

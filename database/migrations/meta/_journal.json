@@ -8,6 +8,13 @@
       "when": 1758492267005,
       "tag": "0000_wonderful_hydra",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1767990498710,
+      "tag": "0001_freezing_toxin",
+      "breakpoints": true
     }
   ]
 }

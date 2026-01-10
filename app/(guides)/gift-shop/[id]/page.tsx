@@ -1,24 +1,24 @@
 "use client";
-import React, { useState } from "react";
+import ProductCard from "@/components/shop/ProductCard";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Product } from "@/interfaces/product";
+import { product, relatedProducts } from "@/mock/shop";
 import { motion } from "framer-motion";
 import {
-  StarIcon,
-  ShoppingCartIcon,
-  HeartIcon,
-  ShareIcon,
-  TruckIcon,
-  ShieldCheckIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
+  HeartIcon,
   MinusIcon,
   PlusIcon,
+  ShareIcon,
+  ShieldCheckIcon,
+  ShoppingCartIcon,
+  StarIcon,
+  TruckIcon,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import ProductCard from "@/components/shop/ProductCard";
-import { product, relatedProducts } from "@/mock/shop";
-import { Product } from "@/interfaces/product";
 import Image from "next/image";
+import { useState } from "react";
 
 const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
@@ -94,7 +94,7 @@ const ProductDetail = () => {
                 {product.images!.map((image, index) => (
                   <button
                     key={index}
-                    className={`w-20 h-20 rounded-md overflow-hidden flex-shrink-0 border-2 ${
+                    className={`w-20 h-20 rounded-md overflow-hidden shrink-0 border-2 ${
                       activeImageIndex === index ? "border-emerald-500" : "border-transparent"
                     }`}
                     onClick={() => setActiveImageIndex(index)}
@@ -183,7 +183,7 @@ const ProductDetail = () => {
                       min="1"
                       value={quantity}
                       onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
-                      className="w-16 h-10 border-t border-b border-gray-300 text-center [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                      className="w-16 h-10 border-t border-b border-gray-300 text-center [-moz-appearance:textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
                     />
                     <button
                       className="w-10 h-10 rounded-r-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
@@ -328,7 +328,7 @@ const ProductDetail = () => {
                           alt={review.name}
                           className="w-10 h-10 rounded-full object-cover mr-4"
                         />
-                        <div className="flex-grow">
+                        <div className="grow">
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                             <div>
                               <h4 className="font-medium">{review.name}</h4>

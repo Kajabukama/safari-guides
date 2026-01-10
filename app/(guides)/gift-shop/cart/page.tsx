@@ -1,22 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { cartItems } from "@/mock/card";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
 import {
-  ShoppingCartIcon,
-  TrashIcon,
   ArrowLeftIcon,
   CreditCardIcon,
-  ShieldCheckIcon,
-  TruckIcon,
   MinusIcon,
   PlusIcon,
+  ShieldCheckIcon,
+  ShoppingCartIcon,
+  TrashIcon,
+  TruckIcon,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
 import Link from "next/link";
-import { cartItems } from "@/mock/card";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const Cart = () => {
   const router = useRouter();
@@ -61,11 +64,11 @@ const Cart = () => {
   return (
     <div className="min-h-screen py-12">
       <div className="container mx-auto px-4">
-        <div className="flex items-center mb-8">
+        <div className="flex items-center gap-3 mb-8">
           <h1 className="text-3xl font-bold">Shopping Cart</h1>
-          <span className="ml-3 text-sm font-medium px-2 py-1 rounded-full">
+          <Badge variant="secondary">
             {items.length} {items.length === 1 ? "Item" : "Items"}
-          </span>
+          </Badge>
         </div>
         {items.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -77,117 +80,117 @@ const Cart = () => {
               variants={fadeIn}
             >
               <Card>
-                <CardContent className="p-6">
-                  {items.map((item) => (
-                    <div
-                      key={item.id}
-                      className="flex flex-col sm:flex-row border-b py-6 last:border-b-0 last:pb-0 first:pt-0"
-                    >
-                      <div className="sm:w-24 sm:h-24 mb-4 sm:mb-0 sm:mr-6">
-                        <Image
-                          width={900}
-                          height={900}
-                          src={item.image}
-                          alt={item.name}
-                          className="w-full h-full object-cover rounded-md"
-                        />
-                      </div>
-                      <div className="flex-grow">
-                        <div className="flex flex-col sm:flex-row sm:justify-between mb-2">
-                          <Link
-                            href={`/product/${item.id}`}
-                            className="font-medium hover:text-emerald-600 transition-colors"
-                          >
-                            {item.name}
-                          </Link>
-                          <span className="font-semibold text-emerald-700 mt-1 sm:mt-0">
-                            ${Number(item.price).toFixed(2)}
-                          </span>
+                <CardContent>
+                  {items.map((item, index) => (
+                    <div key={item.id}>
+                      {index > 0 && <Separator />}
+                      <div className="flex flex-col sm:flex-row gap-4 py-6">
+                        <div className="w-24 h-24 shrink-0">
+                          <Image
+                            width={96}
+                            height={96}
+                            src={item.image}
+                            alt={item.name}
+                            className="w-full h-full object-cover rounded-md"
+                          />
                         </div>
-                        <p className="text-sm text-gray-500 mb-2">Seller: {item.seller?.name}</p>
-                        {item.color && (
-                          <p className="text-sm text-gray-500 mb-4">Color: {item.color}</p>
-                        )}
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <button
-                              className="w-8 h-8 rounded-l-md border border-gray-300 flex items-center justify-center hover:bg-gray-50"
-                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        <div className="flex-1 space-y-2">
+                          <div className="flex justify-between items-start">
+                            <Link
+                              href={`/product/${item.id}`}
+                              className="font-medium hover:underline"
                             >
-                              <MinusIcon size={14} />
-                            </button>
-                            <input
-                              type="number"
-                              min="1"
-                              value={item.quantity}
-                              onChange={(e) =>
-                                updateQuantity(item.id, parseInt(e.target.value) || 1)
-                              }
-                              className="w-12 h-8 border-t border-b border-gray-300 text-center text-sm [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-                            />
-                            <button
-                              className="w-8 h-8 rounded-r-md border border-gray-300 flex items-center justify-center hover:bg-gray-50"
-                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            >
-                              <PlusIcon size={14} />
-                            </button>
+                              {item.name}
+                            </Link>
+                            <span className="font-semibold">${Number(item.price).toFixed(2)}</span>
                           </div>
-                          <Button
-                            variant="destructive"
-                            size="icon"
-                            className=""
-                            onClick={() => removeItem(item.id)}
-                          >
-                            <TrashIcon size={18} />
-                          </Button>
+                          <p className="text-sm text-muted-foreground">
+                            Seller: {item.seller?.name}
+                          </p>
+                          {item.color && (
+                            <p className="text-sm text-muted-foreground">Color: {item.color}</p>
+                          )}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              <Button
+                                variant="outline"
+                                size="icon"
+                                className="h-8 w-8 rounded-r-none"
+                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                              >
+                                <MinusIcon className="h-4 w-4" />
+                              </Button>
+                              <Input
+                                type="number"
+                                min="1"
+                                value={item.quantity}
+                                onChange={(e) =>
+                                  updateQuantity(item.id, parseInt(e.target.value) || 1)
+                                }
+                                className="h-8 w-12 rounded-none border-x-0 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                              />
+                              <Button
+                                variant="outline"
+                                size="icon"
+                                className="h-8 w-8 rounded-l-none"
+                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                              >
+                                <PlusIcon className="h-4 w-4" />
+                              </Button>
+                            </div>
+                            <Button variant="ghost" size="icon" onClick={() => removeItem(item.id)}>
+                              <TrashIcon className="h-4 w-4" />
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     </div>
                   ))}
                 </CardContent>
               </Card>
-              <div className="mt-6">
-                <Link
-                  href="/gift-shop"
-                  className="inline-flex items-center text-emerald-600 hover:text-emerald-700 font-medium"
-                >
-                  <ArrowLeftIcon size={16} className="mr-2" />
+              <Button variant="outline" className="mt-6" asChild>
+                <Link href="/gift-shop">
+                  <ArrowLeftIcon className="mr-2 h-4 w-4" />
                   Continue Shopping
                 </Link>
-              </div>
+              </Button>
             </motion.div>
             {/* Order Summary */}
             <motion.div initial="hidden" animate="visible" variants={fadeIn}>
               <Card className="sticky top-24">
-                <CardContent className="p-6">
-                  <h2 className="text-xl font-bold mb-6">Order Summary</h2>
-                  <div className="space-y-4 mb-6">
+                <CardHeader>
+                  <CardTitle>Order Summary</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
                     <div className="flex justify-between">
-                      <span className="">Subtotal</span>
+                      <span className="text-muted-foreground">Subtotal</span>
                       <span className="font-medium">${subtotal.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="">Shipping</span>
+                      <span className="text-muted-foreground">Shipping</span>
                       <span className="font-medium">
                         {shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}
                       </span>
                     </div>
-                    <div className="border-t pt-4 flex justify-between">
+                    <Separator />
+                    <div className="flex justify-between">
                       <span className="font-semibold">Total</span>
-                      <span className="font-bold text-emerald-700">${total.toFixed(2)}</span>
+                      <span className="font-bold">${total.toFixed(2)}</span>
                     </div>
                   </div>
-                  <Button className="w-full mb-4" size="lg" onClick={handleCheckout}>
-                    <CreditCardIcon size={18} className="mr-2" />
+                  <Button className="w-full mt-6" size="lg" onClick={handleCheckout}>
+                    <CreditCardIcon className="mr-2 h-4 w-4" />
                     Proceed to Checkout
                   </Button>
-                  <div className="space-y-3 mt-6">
-                    <div className="flex items-center text-sm">
-                      <ShieldCheckIcon size={16} className="text-emerald-600 mr-2" />
+                  <Separator className="my-6" />
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <ShieldCheckIcon className="h-4 w-4" />
                       <span>Secure payment</span>
                     </div>
-                    <div className="flex items-center text-sm">
-                      <TruckIcon size={16} className="text-emerald-600 mr-2" />
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <TruckIcon className="h-4 w-4" />
                       <span>International shipping available</span>
                     </div>
                   </div>
@@ -202,15 +205,15 @@ const Cart = () => {
             animate="visible"
             variants={fadeIn}
           >
-            <ShoppingCartIcon size={64} className="mx-auto text-gray-300 mb-6" />
+            <ShoppingCartIcon className="mx-auto h-16 w-16 text-muted-foreground mb-6" />
             <h2 className="text-2xl font-bold mb-2">Your cart is empty</h2>
-            <p className="text-gray-600 mb-8 max-w-md mx-auto">
+            <p className="text-muted-foreground mb-8 max-w-md mx-auto">
               Looks like you haven&apos;t added any items to your cart yet. Explore our shop to
               discover authentic Tanzanian treasures.
             </p>
-            <Link href="/gift-shop">
-              <Button size="lg">Start Shopping</Button>
-            </Link>
+            <Button size="lg" asChild>
+              <Link href="/gift-shop">Start Shopping</Link>
+            </Button>
           </motion.div>
         )}
       </div>

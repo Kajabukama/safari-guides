@@ -1,24 +1,10 @@
 "use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import {
-  CreditCardIcon,
-  ShieldCheckIcon,
-  TruckIcon,
-  ChevronLeftIcon,
-  LockIcon,
-  CreditCard as CreditCardIconOutline,
-  Smartphone,
-  Landmark,
-  Wallet,
-  ArrowRightIcon,
-} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -26,11 +12,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useRouter } from "next/navigation";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cartItems } from "@/mock/shop";
+import { motion } from "framer-motion";
+import {
+  ArrowRightIcon,
+  ChevronLeftIcon,
+  CreditCardIcon,
+  CreditCard as CreditCardIconOutline,
+  Landmark,
+  LockIcon,
+  ShieldCheckIcon,
+  Smartphone,
+  TruckIcon,
+  Wallet,
+} from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 const Checkout = () => {
   const navigate = useRouter();
@@ -452,7 +452,7 @@ const Checkout = () => {
                         alt={item.name}
                         className="w-16 h-16 object-cover rounded-md mr-4"
                       />
-                      <div className="flex-grow">
+                      <div className="grow">
                         <h3 className="text-sm font-medium">{item.name}</h3>
                         <div className="flex justify-between text-sm mt-1">
                           <span>Qty: {item.quantity}</span>

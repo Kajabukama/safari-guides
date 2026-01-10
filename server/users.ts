@@ -1,20 +1,15 @@
 "use server";
 
 import { db } from "@/database/drizzle";
-import { member, user } from "@/database/schema";
+import { member, user, userProfile } from "@/database/schema";
 import { auth } from "@/lib/auth";
+import { requireAuth } from "@/lib/auth-server";
+import { generateId } from "better-auth";
 import { eq, inArray, not } from "drizzle-orm";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-export const getCurrentUser = async () => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session) {
-    redirect("/");
-  }
+export const getCurrentUserWithProfile = async () => {
+  const session = await requireAuth();
 
   const currentUser = await db.query.user.findFirst({
     where: eq(user.id, session.user.id),
@@ -53,9 +48,15 @@ export const signIn = async (email: string, password: string) => {
   }
 };
 
-export const signUp = async (email: string, password: string, name: string, userType: string) => {
+export const signUp = async (
+  email: string,
+  password: string,
+  name: string,
+  userType: string,
+  country: string
+) => {
   try {
-    await auth.api.signUpEmail({
+    const signUpResponse = await auth.api.signUpEmail({
       body: {
         email,
         password,
@@ -63,6 +64,18 @@ export const signUp = async (email: string, password: string, name: string, user
         userType,
       },
     });
+
+    // Create user profile with country information
+    if (signUpResponse?.user?.id) {
+      await db.insert(userProfile).values({
+        id: generateId(),
+        userId: signUpResponse.user.id,
+        country,
+        available: true,
+        verified: false,
+        reviewCount: 0,
+      });
+    }
 
     return {
       success: true,

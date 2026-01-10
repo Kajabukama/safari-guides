@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
 import GuideList from "@/components/guides/GuideList";
+import { motion } from "framer-motion";
+import React from "react";
 import HeadingSection from "../HeadingSection";
 
 const GuidesSection: React.FC = () => {
@@ -34,7 +34,7 @@ const GuidesSection: React.FC = () => {
         title="Popular Safari Guides"
         description="Meet our experienced and passionate guides"
         linkLabel="View all"
-        url="/guides"
+        url="/safari-guides"
       />
       <GuideList />
     </motion.div>

@@ -1,12 +1,12 @@
 "use server";
 
 import { db } from "@/database/drizzle";
-import { eq, inArray } from "drizzle-orm";
-import { getCurrentUser } from "@/server/users";
 import { member, organization } from "@/database/schema";
+import { getCurrentUserWithProfile } from "@/server/users";
+import { eq, inArray } from "drizzle-orm";
 
 export async function getOrganizations() {
-  const { currentUser } = await getCurrentUser();
+  const { currentUser } = await getCurrentUserWithProfile();
 
   const members = await db.query.member.findMany({
     where: eq(member.userId, currentUser.id),

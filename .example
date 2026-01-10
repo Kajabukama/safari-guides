@@ -1,1 +1,47 @@
 NEXT_PUBLIC_GOOGLE_API="AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+
+# Google
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+
+# Resend
+RESEND_API_KEY="re_2Kejb8BX_K5UwsCWJpkuWCzjsgMbZwz5t"
+EMAIL_SENDER_NAME="Guides.Africa"
+EMAIL_SENDER_ADDRESS="onboarding@resend.dev"
+
+# Auth
+BETTER_AUTH_SECRET="i837kmMqklgKKybdN8TnFwkV+bj1l2j1CNMZ3cPVfZdoew=="
+BETTER_AUTH_URL="http://localhost:3000"
+
+# DB
+DATABASE_URL='postgresql://neondb_owner:npg_BMC5eNHrD7Jd@ep-mute-union-ad55hfdr-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+
+# Neon Auth environment variables for Next.js
+# Recommended for most uses
+DATABASE_URL=postgresql://neondb_owner:npg_prNlvAmtuq47@ep-orange-wave-ad56vdl9-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require
+
+# For uses requiring a connection without pgbouncer
+DATABASE_URL_UNPOOLED=postgresql://neondb_owner:npg_prNlvAmtuq47@ep-orange-wave-ad56vdl9.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require
+
+# Parameters for constructing your own connection string
+PGHOST=ep-orange-wave-ad56vdl9-pooler.c-2.us-east-1.aws.neon.tech
+PGHOST_UNPOOLED=ep-orange-wave-ad56vdl9.c-2.us-east-1.aws.neon.tech
+PGUSER=neondb_owner
+PGDATABASE=neondb
+PGPASSWORD=npg_prNlvAmtuq47
+
+# Parameters for Vercel Postgres Templates
+POSTGRES_URL=postgresql://neondb_owner:npg_prNlvAmtuq47@ep-orange-wave-ad56vdl9-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require
+POSTGRES_URL_NON_POOLING=postgresql://neondb_owner:npg_prNlvAmtuq47@ep-orange-wave-ad56vdl9.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require
+POSTGRES_USER=neondb_owner
+POSTGRES_HOST=ep-orange-wave-ad56vdl9-pooler.c-2.us-east-1.aws.neon.tech
+POSTGRES_PASSWORD=npg_prNlvAmtuq47
+POSTGRES_DATABASE=neondb
+POSTGRES_URL_NO_SSL=postgresql://neondb_owner:npg_prNlvAmtuq47@ep-orange-wave-ad56vdl9-pooler.c-2.us-east-1.aws.neon.tech/neondb
+POSTGRES_PRISMA_URL=postgresql://neondb_owner:npg_prNlvAmtuq47@ep-orange-wave-ad56vdl9-pooler.c-2.us-east-1.aws.neon.tech/neondb?connect_timeout=15&sslmode=require
+
+# Neon Auth environment variables for Next.js
+NEXT_PUBLIC_STACK_PROJECT_ID=37151994-d268-48c1-8556-9c666dbc60c3
+NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY=pck_s846rwx4zs85x2yc1q3qjbb9skn7pb5k28hnz868hj2f8
+STACK_SECRET_SERVER_KEY=ssk_pg0vpe4mmskpd3cryp7w5bzkbvwzkx61h85e559ewmryr

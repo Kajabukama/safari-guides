@@ -1,26 +1,33 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { signIn } from "@/server/users";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { AtSignIcon, Loader2, LockKeyholeIcon } from "lucide-react";
-import { authClient } from "@/lib/auth-client";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import { ContinueWithDivider } from "@/components/continue-with-divider";
 import { SocialButtons } from "@/components/forms/social-buttons";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
+import { signIn } from "@/server/users";
 import { LoginFormInput, loginSchema } from "@/validation/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AtSignIcon, Loader2, LockKeyholeIcon } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
-  const lastMethod = authClient.getLastUsedLoginMethod();
+  const [isClient, setIsClient] = useState(false);
+  const [lastMethod, setLastMethod] = useState<string | null>(null);
+
+  useEffect(() => {
+    setIsClient(true);
+    setLastMethod(authClient.getLastUsedLoginMethod());
+  }, []);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
@@ -37,7 +44,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
     const { success, message } = await signIn(values.email, values.password);
     if (success) {
       toast.success(message as string);
-      router.push("/dashboard");
+      router.push("/main");
     } else {
       toast.error(message as string);
     }
@@ -66,8 +73,8 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                       name="email"
                       render={({ field }) => (
                         <FormItem className="relative">
-                          {lastMethod === "email" && (
-                            <Badge className="absolute bg-primary text-sm right-3 top-1/2 transform -translate-y-1/2 ">
+                          {isClient && lastMethod === "email" && (
+                            <Badge className="absolute bg-primary text-sm right-3 top-1/2 transform -translate-y-1/2">
                               last used
                             </Badge>
                           )}

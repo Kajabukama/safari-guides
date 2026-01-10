@@ -1,8 +1,8 @@
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { Analytics } from "@vercel/analytics/next";
-import { Toaster } from "@/components/ui/sonner";
 export const metadata: Metadata = {
   title: "Guides.Africa",
   description: "Authentic African safari guides",
@@ -24,7 +24,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <div className="min-h-screen flex flex-col">{children}</div>
             <Analytics />
             <Toaster
               position="top-center"

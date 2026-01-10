@@ -30,6 +30,7 @@ export const loginSchema = z
 export const signupSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters long"),
   email: z.string().email("Please enter a valid email address"),
+  country: z.string().min(1, "Please select a country"),
   userType: z.enum(["traveler", "guide"]),
   password: z
     .string()

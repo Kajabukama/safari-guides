@@ -1,39 +1,95 @@
 "use client";
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import {
-  StarIcon,
-  MapPinIcon,
-  CheckCircleIcon,
-  UtensilsIcon,
-  WifiIcon,
-  TvIcon,
-  BedDoubleIcon,
-  UsersIcon,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { PageHero } from "@/components/hero/page-hero";
 import LocationMap from "@/components/maps/LocationMap";
-import { service } from "@/mock/service";
-import Image from "next/image";
-import ServiceImageSlider from "@/components/services/ServiceImageSlider";
 import ServiceBookingForm from "@/components/services/ServiceBookingForm";
 import SimilarServicesList from "@/components/services/SimilarServicesList";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { service } from "@/mock/service";
+import { motion } from "framer-motion";
+import {
+  BedDoubleIcon,
+  CheckCircleIcon,
+  MapPinIcon,
+  StarIcon,
+  TvIcon,
+  UsersIcon,
+  UtensilsIcon,
+  WifiIcon,
+} from "lucide-react";
+import Image from "next/image";
 
 const ServiceDetail = () => {
-  const [isLiked, setIsLiked] = useState(false);
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
-  // Animation variants
-  const fadeIn = {
+  // Advanced Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
     hidden: {
       opacity: 0,
-      y: 20,
+      y: 30,
+      scale: 0.95,
     },
     visible: {
       opacity: 1,
       y: 0,
+      scale: 1,
       transition: {
         duration: 0.6,
+        ease: [0.6, 0.05, 0.01, 0.9] as const,
+      },
+    },
+  };
+
+  const slideInLeft = {
+    hidden: {
+      opacity: 0,
+      x: -50,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.7,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+
+  const slideInRight = {
+    hidden: {
+      opacity: 0,
+      x: 50,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.7,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+
+  const scaleIn = {
+    hidden: {
+      opacity: 0,
+      scale: 0.8,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut" as const,
       },
     },
   };
@@ -54,17 +110,22 @@ const ServiceDetail = () => {
   };
   return (
     <div className="min-h-screen">
-      <ServiceImageSlider
-        service={service}
-        activeImageIndex={activeImageIndex}
-        setActiveImageIndex={setActiveImageIndex}
-        isLiked={isLiked}
-        setIsLiked={setIsLiked}
+      <PageHero
+        images={service.images}
+        title={service.title}
+        description={service.location}
+        height="60vh"
       />
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
-          <div className="lg:col-span-2">
-            <motion.div variants={fadeIn} initial="hidden" animate="visible">
+          <motion.div
+            className="lg:col-span-2"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <motion.div variants={itemVariants}>
               <div className="flex justify-between items-start mb-2">
                 <h1 className="text-3xl font-bold">{service.title}</h1>
                 <div className="flex items-center">
@@ -95,12 +156,14 @@ const ServiceDetail = () => {
                   </p>
                 </div>
               </div>
-              <div className="mb-8">
-                <h2 className="text-xl font-semibold mb-4">
-                  About This {service.type === "accommodation" ? "Accommodation" : "Service"}
-                </h2>
-                <p className="whitespace-pre-line">{service.description}</p>
-              </div>
+            </motion.div>
+            <motion.div variants={itemVariants} className="mb-8">
+              <h2 className="text-xl font-semibold mb-4">
+                About This {service.type === "accommodation" ? "Accommodation" : "Service"}
+              </h2>
+              <p className="whitespace-pre-line">{service.description}</p>
+            </motion.div>
+            <motion.div variants={itemVariants}>
               <Tabs defaultValue="features" className="mb-8">
                 <TabsList className="w-full md:w-auto">
                   <TabsTrigger value="features">Features</TabsTrigger>
@@ -110,19 +173,37 @@ const ServiceDetail = () => {
                   <TabsTrigger value="faq">FAQ</TabsTrigger>
                 </TabsList>
                 <TabsContent value="features" className="mt-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <motion.div
+                    className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
                     {service.features?.map((feature: string, index: number) => (
-                      <div key={index} className="flex items-start text-base">
+                      <motion.div
+                        key={index}
+                        variants={itemVariants}
+                        className="flex items-start text-base"
+                      >
                         {getFeatureIcon(feature)}
                         <span>{feature}</span>
-                      </div>
+                      </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
                 </TabsContent>
                 <TabsContent value="rooms" className="mt-6">
-                  <div className="space-y-6">
+                  <motion.div
+                    className="space-y-6"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
                     {service.rooms?.map((room, index) => (
-                      <div key={index} className="rounded-2xl overflow-hidden">
+                      <motion.div
+                        key={index}
+                        variants={itemVariants}
+                        className="rounded-2xl overflow-hidden"
+                      >
                         <div className="flex items-center">
                           <div className="p-6">
                             <div className="flex gap-x-5 mb-2">
@@ -159,13 +240,18 @@ const ServiceDetail = () => {
                             <Button>Select</Button>
                           </div>
                         </div>
-                      </div>
+                      </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
                 </TabsContent>
                 <TabsContent value="policies" className="mt-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-card p-4 rounded-2xl">
+                  <motion.div
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    <motion.div variants={itemVariants} className="bg-card p-4 rounded-2xl">
                       <h3 className="font-semibold mb-2">Check-in / Check-out</h3>
                       <div className="flex justify-between mb-2">
                         <span>Check-in</span>
@@ -175,20 +261,20 @@ const ServiceDetail = () => {
                         <span>Check-out</span>
                         <span>{service.policies?.checkOut}</span>
                       </div>
-                    </div>
-                    <div className="bg-card p-4 rounded-2xl">
+                    </motion.div>
+                    <motion.div variants={itemVariants} className="bg-card p-4 rounded-2xl">
                       <h3 className="font-semibold mb-2">Cancellation Policy</h3>
                       <p>{service.policies?.cancellation}</p>
-                    </div>
-                    <div className="bg-card p-4 rounded-2xl">
+                    </motion.div>
+                    <motion.div variants={itemVariants} className="bg-card p-4 rounded-2xl">
                       <h3 className="font-semibold mb-2">Children</h3>
                       <p>{service.policies?.children}</p>
-                    </div>
-                    <div className="bg-card p-4 rounded-2xl">
+                    </motion.div>
+                    <motion.div variants={itemVariants} className="bg-card p-4 rounded-2xl">
                       <h3 className="font-semibold mb-2">Pets</h3>
                       <p>{service.policies?.pets}</p>
-                    </div>
-                  </div>
+                    </motion.div>
+                  </motion.div>
                 </TabsContent>
                 <TabsContent value="reviews" className="mt-6">
                   <div className="mb-6">
@@ -212,11 +298,20 @@ const ServiceDetail = () => {
                       </span>
                     </div>
                   </div>
-                  <div className="space-y-6">
+                  <motion.div
+                    className="space-y-6"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
                     {service.reviews?.map((review) => (
-                      <div key={review.id} className="border-b pb-6 last:border-b-0 last:pb-0">
+                      <motion.div
+                        key={review.id}
+                        variants={itemVariants}
+                        className="border-b pb-6 last:border-b-0 last:pb-0"
+                      >
                         <div className="flex items-start">
-                          <div className="flex-grow">
+                          <div className="grow">
                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                               <div className="flex gap-x-4">
                                 <div className="size-14 rounded-full overflow-hidden">
@@ -255,9 +350,9 @@ const ServiceDetail = () => {
                             <p className="text-muted-foreground">{review.text}</p>
                           </div>
                         </div>
-                      </div>
+                      </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
                 </TabsContent>
                 <TabsContent value="faq" className="mt-6">
                   <div className="space-y-6">
@@ -270,18 +365,32 @@ const ServiceDetail = () => {
                   </div>
                 </TabsContent>
               </Tabs>
-              <div className="mb-8">
-                <h2 className="text-xl font-semibold mb-4">Location</h2>
-                <LocationMap
-                  latitude={service.coordinates?.latitude?.toString() || "0"}
-                  longitude={service.coordinates?.longitude?.toString() || "0"}
-                />
-              </div>
             </motion.div>
-          </div>
-          <ServiceBookingForm />
+            <motion.div variants={itemVariants} className="mb-8">
+              <h2 className="text-xl font-semibold mb-4">Location</h2>
+              <LocationMap
+                latitude={service.coordinates?.latitude?.toString() || "0"}
+                longitude={service.coordinates?.longitude?.toString() || "0"}
+              />
+            </motion.div>
+          </motion.div>
+          <motion.div
+            variants={slideInRight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <ServiceBookingForm />
+          </motion.div>
         </div>
-        <SimilarServicesList service={service} />
+        <motion.div
+          variants={scaleIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <SimilarServicesList service={service} />
+        </motion.div>
       </div>
     </div>
   );

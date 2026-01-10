@@ -1,26 +1,37 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { RadioGroup } from "@/components/ui/radio-group";
-import { cn } from "@/lib/utils";
+import { ContinueWithDivider } from "@/components/continue-with-divider";
+import { SocialButtons } from "@/components/forms/social-buttons";
+import { RadioSelect } from "@/components/radio-select";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { RadioGroup } from "@/components/ui/radio-group";
+import { countries } from "@/lib/countries";
+import { cn } from "@/lib/utils";
 import { signUp } from "@/server/users";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { AtSignIcon, Loader2, LockKeyholeIcon, UserRoundIcon } from "lucide-react";
-import Link from "next/link";
-import { ContinueWithDivider } from "@/components/continue-with-divider";
 import { SignupFormInput, signupSchema, userType } from "@/validation";
-import { RadioSelect } from "@/components/radio-select";
-import { SocialButtons } from "@/components/forms/social-buttons";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AtSignIcon, ChevronsUpDown, Loader2, LockKeyholeIcon, UserRoundIcon } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export function SignupForm({ className, ...props }: React.ComponentProps<"div">) {
   const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const router = useRouter();
   const form = useForm<SignupFormInput>({
@@ -28,10 +39,21 @@ export function SignupForm({ className, ...props }: React.ComponentProps<"div">)
     defaultValues: {
       name: "",
       email: "",
+      country: "Tanzania",
       password: "",
       userType: "guide",
     },
   });
+
+  const selectedUserType = form.watch("userType");
+
+  useEffect(() => {
+    if (selectedUserType === "guide") {
+      form.setValue("country", "Tanzania");
+    } else if (selectedUserType === "traveler") {
+      form.setValue("country", "United States");
+    }
+  }, [selectedUserType, form]);
 
   async function onSubmit(values: SignupFormInput) {
     setIsLoading(true);
@@ -39,11 +61,12 @@ export function SignupForm({ className, ...props }: React.ComponentProps<"div">)
       values.email,
       values.password,
       values.name,
-      values.userType
+      values.userType,
+      values.country
     );
     if (success) {
       toast.success(`${message as string}`);
-      router.push("/dashboard");
+      router.push("/");
     } else {
       toast.error(message as string);
     }
@@ -112,6 +135,61 @@ export function SignupForm({ className, ...props }: React.ComponentProps<"div">)
                               />
                             </div>
                           </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="country"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col">
+                          <Popover open={open} onOpenChange={setOpen}>
+                            <PopoverTrigger asChild>
+                              <FormControl>
+                                <Button
+                                  variant="outline"
+                                  role="combobox"
+                                  className={cn(
+                                    "w-full justify-between",
+                                    !field.value && "text-muted-foreground"
+                                  )}
+                                >
+                                  {field.value
+                                    ? countries.find((country) => country.name === field.value)
+                                        ?.emoji +
+                                      " " +
+                                      countries.find((country) => country.name === field.value)
+                                        ?.name
+                                    : "Select your country"}
+                                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                </Button>
+                              </FormControl>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-full p-0" align="start">
+                              <Command>
+                                <CommandInput placeholder="Search country..." />
+                                <CommandList>
+                                  <CommandEmpty>No country found.</CommandEmpty>
+                                  <CommandGroup>
+                                    {countries.map((country) => (
+                                      <CommandItem
+                                        value={country.name}
+                                        key={country.id}
+                                        onSelect={() => {
+                                          form.setValue("country", country.name);
+                                          setOpen(false);
+                                        }}
+                                      >
+                                        {country.emoji} {country.name}
+                                      </CommandItem>
+                                    ))}
+                                  </CommandGroup>
+                                </CommandList>
+                              </Command>
+                            </PopoverContent>
+                          </Popover>
                           <FormMessage />
                         </FormItem>
                       )}

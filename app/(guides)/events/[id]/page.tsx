@@ -1,29 +1,28 @@
 "use client";
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { event } from "@/mock/event";
-import {
-  CalendarIcon,
-  ClockIcon,
-  MapPinIcon,
-  UsersIcon,
-  HeartIcon,
-  ShareIcon,
-  CheckCircleIcon,
-  UserRoundIcon,
-} from "lucide-react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import LocationMap from "@/components/maps/LocationMap";
-import Image from "next/image";
-import { Event } from "@/interfaces/event";
-import { events } from "@/mock/events";
-import SliderThumbnail from "@/components/SliderThumbnail";
 import EventBookingForm from "@/components/events/EventBookingForm";
 import EventCard from "@/components/events/EventCard";
+import { PageHero } from "@/components/hero/page-hero";
+import LocationMap from "@/components/maps/LocationMap";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Event } from "@/interfaces/event";
+import { event } from "@/mock/event";
+import { events } from "@/mock/events";
+import { motion } from "framer-motion";
+import {
+  CalendarIcon,
+  CheckCircleIcon,
+  ClockIcon,
+  HeartIcon,
+  MapPinIcon,
+  ShareIcon,
+  UserRoundIcon,
+  UsersIcon,
+} from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
 
 const EventDetail = () => {
   const [isLiked, setIsLiked] = useState(false);
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const fadeIn = {
     hidden: {
       opacity: 0,
@@ -39,30 +38,15 @@ const EventDetail = () => {
   };
   return (
     <div className="min-h-screen">
-      <div className="relative">
-        <div className="h-[60vh] overflow-hidden">
-          <Image
-            src={event.images[activeImageIndex]}
-            alt={event.title}
-            className="w-full h-full object-cover"
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        </div>
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-          {event.images.map((image, index) => (
-            <SliderThumbnail
-              key={index}
-              image={image}
-              index={index}
-              activeImageIndex={activeImageIndex}
-              setActiveImageIndex={setActiveImageIndex}
-            />
-          ))}
-        </div>
-        <div className="absolute top-4 right-4 flex space-x-2">
+      <PageHero
+        images={event.images}
+        title={event.title}
+        description={event.location}
+        height="60vh"
+      >
+        <div className="absolute top-4 right-4 flex space-x-2 z-30">
           <div
-            className="bg-white rounded-full flex items-center justify-center p-2 shadow-md hover:bg-gray-100 transition-colors size-10"
+            className="bg-white rounded-full flex items-center justify-center p-2 shadow-md hover:bg-gray-100 transition-colors size-10 cursor-pointer"
             onClick={() => setIsLiked(!isLiked)}
           >
             <HeartIcon
@@ -70,11 +54,11 @@ const EventDetail = () => {
               className={isLiked ? "text-red-500 fill-red-500" : "text-gray-700"}
             />
           </div>
-          <div className="bg-white rounded-full flex items-center justify-center p-2 shadow-md hover:bg-gray-100 transition-colors size-10">
+          <div className="bg-white rounded-full flex items-center justify-center p-2 shadow-md hover:bg-gray-100 transition-colors size-10 cursor-pointer">
             <ShareIcon size={20} className="text-gray-700" />
           </div>
         </div>
-      </div>
+      </PageHero>
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
